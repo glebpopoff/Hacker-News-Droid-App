@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen  
+	xmlns:android="http://schemas.android.com/apk/res/android">  
+	<PreferenceCategory android:title="App Preferences">  
+		<CheckBoxPreference  
+			android:key="article_onlick"  
+			android:title="Go to URL on Tap"
+			android:summary="Go to HN Comments or URL on item tap" 
+			android:defaultValue="true" />
+		
+		<com.glebpopov.hackernews.settings.ClearSavedContent  
+			android:key="clear_saved_content"
+			android:title="Clear Saved Content"  
+			android:summary="Click here to clear saved content"
+			android:defaultValue="true" />
+			
+		<com.glebpopov.hackernews.settings.ClearInstapaperLogin
+			android:key="clear_instapaper_content"
+			android:title="Clear Instapaper Login"  
+			android:summary="Click here to clear Instapaper authentication tokens"
+			android:defaultValue="true" />
+		
+	</PreferenceCategory>
+	<PreferenceCategory android:title="About the App">
+		<com.glebpopov.hackernews.settings.AboutPreference
+			android:key="about"  
+			android:title="About"  
+			android:summary="Author, API, Version, etc"
+			android:dialogTitle="About the App" />  
+
+	</PreferenceCategory>  
+	<PreferenceCategory android:title="Warranty Information">
+		<com.glebpopov.hackernews.settings.WarrantyPreference
+			android:key="warrantyinfo"  
+			android:title="Warranty Information"  
+			android:summary="FYI on the warranty..."
+			android:dialogTitle="Warranty Information" />  
+
+	</PreferenceCategory> 
+</PreferenceScreen>  

@@ -1,0 +1,1 @@
+keytool -genkey -v -keystore hackernews-key.keystore -alias hackernews -keyalg RSA -keysize 2048 -validity 10000

@@ -1,0 +1,42 @@
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/body_padding_large"
+        android:paddingRight="@dimen/body_padding_large"
+        android:paddingTop="@dimen/body_padding_medium"
+        android:paddingBottom="@dimen/body_padding_medium">
+        
+ 	<TextView android:id="@+id/story_title"
+            android:layout_alignParentLeft="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextHeader" 
+            android:visibility="gone"
+            />
+            
+        <TextView android:id="@+id/story_hour"
+        	android:layout_below="@id/story_title"
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextHeaderSubTimeWhen" />
+        
+        <TextView android:id="@+id/story_domain"
+        	android:layout_below="@id/story_title"
+        	android:visibility="gone"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextHeaderSubTimeWhen" />
+            
+	
+       	
+            
+    </RelativeLayout>
+</LinearLayout>

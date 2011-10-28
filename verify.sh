@@ -1,0 +1,1 @@
+jarsigner -verify /Users/glebp/Projects/Eclipse/HackerNewsDroid/submission/HackerNewsDroid.apk

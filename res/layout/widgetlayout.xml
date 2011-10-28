@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:background="@drawable/background_shape"
+  android:paddingLeft="10dp"
+  android:paddingRight="10dp"
+  android:paddingTop="10dp"
+  android:paddingBottom="10dp">
+  
+    <ImageView 
+    			android:id="@+id/widget_refresh"
+    			android:src="@drawable/icon" 
+    			android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+    			android:layout_alignParentRight="true"
+            	android:layout_alignParentTop="true"
+    			>
+    </ImageView>
+	
+	<TextView 
+			android:textSize="18sp" 
+			android:id="@+id/widget_title"
+			android:textStyle="bold"
+			android:ellipsize="end"
+			android:text="Please wait..."
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:layout_toLeftOf="@+id/widget_refresh"
+            android:layout_alignParentLeft="true"
+			android:textColor="#ffffff">
+	</TextView>
+	<TextView 
+			android:id="@+id/widget_hour" 
+			android:textSize="14sp"
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:layout_below="@+id/widget_title"
+            android:layout_toLeftOf="@+id/widget_refresh"
+            android:layout_alignParentLeft="true"
+			 android:textColor="#DD2244">
+	</TextView>
+	<TextView android:id="@+id/widget_points"
+	    	android:layout_below="@+id/widget_hour"
+           android:layout_toLeftOf="@+id/widget_refresh"
+           android:layout_alignParentLeft="true"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textSize="14sp"
+           android:textColor="#ffffff"
+           >
+     </TextView>
+        
+       <TextView android:id="@+id/widget_author_comments"
+       		android:layout_below="@+id/widget_hour"
+       		android:textSize="14sp"
+           android:layout_toLeftOf="@+id/widget_refresh"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textColor="#ffffff"
+           >
+        </TextView>
+            
+</RelativeLayout>

@@ -1,0 +1,76 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/header_news"
+    >
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/body_padding_large"
+        android:paddingRight="@dimen/body_padding_large"
+        android:paddingTop="@dimen/body_padding_medium"
+        android:paddingBottom="@dimen/body_padding_medium">
+		
+		<ImageView android:id="@+id/news_image"
+			android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:focusable="false"
+            android:clickable="false"
+            android:layout_marginTop="@dimen/star_button_padding"
+            android:layout_marginLeft="@dimen/star_button_padding"
+            />
+            
+        <TextView android:id="@+id/news_title"
+            android:layout_toLeftOf="@id/news_image"
+            android:layout_alignParentLeft="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextHeader" />
+            
+        <TextView android:id="@+id/news_hour"
+        	android:layout_below="@id/news_title"
+            android:layout_toLeftOf="@id/news_image"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextHeaderSubTimeWhen" />
+        
+        <TextView android:id="@+id/news_domain"
+        	android:layout_below="@id/news_title"
+            android:layout_toLeftOf="@id/news_image"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextHeaderSubTimeWhen" />
+            
+		<TextView android:id="@+id/news_points"
+		    android:layout_below="@+id/news_hour"
+            android:layout_toLeftOf="@id/news_image"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextHeaderSub" />
+
+         
+        <TextView android:id="@+id/news_comments"
+        	android:layout_below="@+id/news_hour"
+            android:layout_toLeftOf="@id/news_image"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"
+            style="@style/TextHeaderSub" />
+            
+            
+		<TextView android:id="@+id/news_author"
+        	android:layout_below="@+id/news_hour"
+            android:layout_toLeftOf="@id/news_comments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextHeaderSub" />
+        
+        
+    </RelativeLayout>
+</LinearLayout>

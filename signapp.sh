@@ -1,0 +1,1 @@
+jarsigner -verbose -keystore hackernews-key.keystore /Users/glebp/Projects/Eclipse/HackerNewsDroid/submission/HackerNewsDroid.apk hackernews

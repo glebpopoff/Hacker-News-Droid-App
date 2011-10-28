@@ -1,0 +1,8 @@
+11/17/2011
+
+v2.0
+======
+- Settings screen (Inverted Color Scheme, Clear Instapaper Credentials, Clear Cache, Go to Comments, About)
+- Nested Comments
+- No data retrieved (would you like to retry)
+- Menu hardware key pressed

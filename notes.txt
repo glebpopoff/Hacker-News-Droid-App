@@ -1,0 +1,12 @@
+9/15/11
+
+vote: <a id=up_3001808 href="vote?for=3001808&dir=up&whence=%6e%65%77%73">
+
+points, author, and date: <span id=score_3001808>49 points</span> by <a href="user?id=NelsonMinar">NelsonMinar</a> 1 hour ago
+
+comments link: http://news.ycombinator.org/item?id=3001808
+
+text: http://viewtext.org/
+
+icon: http://getfavicon.appspot.com/
+============================================

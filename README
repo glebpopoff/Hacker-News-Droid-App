@@ -1,0 +1,9 @@
+Hacker News Droid App Source Code
+
+HN geeks everywhere! This is my gift to you. I spent close to a month building the app and the API (http://hndroidapi.appspot.com) and spend at least a few hours a week doing maintenance and feature enhancements.
+
+Hopefully, you can learn something from my code. The app was inspired by Google's IO 2011 app and contains some of the source from the IO app.
+
+Anyways, lets make this a great app so we can all enjoy Hacker News Droid even more. 
+
+You can download the app here: https://market.android.com/details?id=com.glebpopov.hackernews

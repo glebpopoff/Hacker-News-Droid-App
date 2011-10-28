@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/comments_layout"
+    >
+    <RelativeLayout
+    	android:id="@+id/comments_inner_layout"
+    	android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/body_padding_large"
+        android:paddingRight="@dimen/body_padding_large"
+        android:paddingTop="@dimen/body_padding_medium"
+        android:paddingBottom="@dimen/body_padding_medium">
+        
+        
+        <TextView android:id="@+id/comment_author"
+		    android:layout_alignParentLeft="true"
+		    android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextHeaderSub" />
+            
+        <TextView android:id="@+id/comment_whenposted"
+        	android:layout_below="@id/story_break"
+        	android:layout_alignParentRight="true"
+        	android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextHeaderSub" />
+                      
+        <TextView android:id="@+id/comment_comment"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/comment_author"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextComment" />
+            
+    </RelativeLayout>
+</LinearLayout>

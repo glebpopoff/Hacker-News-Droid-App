@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="com.glebpopov.hackernews"
+      android:versionCode="11"
+      android:versionName="2.1">
+    <uses-sdk android:minSdkVersion="7" />
+
+	<application
+        android:label="@string/app_name"
+        android:icon="@drawable/ic_launcher"
+        android:theme="@style/Theme.HNDroid"
+        >
+
+		<service android:name=".service.HackerNewsService">
+    	</service>
+    	
+    	<receiver android:name=".service.HackerNewsWidgetProvider">
+		    <intent-filter>
+		        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+		        <category android:name="android.intent.category.DEFAULT"></category>
+		        <category android:name="android.intent.category.ALTERNATIVE"></category>
+		    </intent-filter>
+		    <meta-data android:name="android.appwidget.provider"
+		               android:resource="@xml/widgetproviderinfo" />
+		</receiver>
+	
+        <!-- Activities for both phones and tablets -->
+
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.HNDroid.Home"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="Hacker News">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name=".settings.EditPreferences"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="Settings" />
+        
+        <activity
+            android:name=".PreviewActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/Theme.HNDroid.Home"
+            android:label="Text" />
+            
+        <activity
+            android:name=".CommentsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/Theme.HNDroid.Home"
+            android:label="Comments" />
+            
+        
+        <activity
+            android:name=".AskActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/Theme.HNDroid.Home"
+            android:label="Ask HN" />
+            
+        <activity
+            android:name=".SavedActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/Theme.HNDroid.Home"
+            android:label="Saved" />
+        
+        <activity
+            android:name=".NewestActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/Theme.HNDroid.Home"
+            android:label="Newest" />
+            
+            
+        <activity
+            android:name=".BestActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/Theme.HNDroid.Home"
+            android:label="Best" />
+            
+   </application>
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+</manifest>

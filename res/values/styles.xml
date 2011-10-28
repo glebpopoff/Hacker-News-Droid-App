@@ -1,0 +1,197 @@
+<resources>
+    <!-- Base application theme is the default theme. -->
+    <style name="Theme" parent="android:style/Theme" />
+
+    <!-- Variation on the Light theme that turns off the title -->
+    <style name="Theme.HNDroid" parent="android:style/Theme.Light">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <!-- custom attributes -->
+        <item name="textHeaderMaxLines">3</item>
+        <item name="trackAbstractMaxLines">2</item>
+
+        <!-- for programmatic instantiation -->
+        <item name="actionbarCompatButtonStyle">@style/ActionBarCompatButton</item>
+        <item name="actionbarCompatProgressIndicatorStyle">@style/ActionBarCompatProgressIndicator</item>
+        <item name="actionbarCompatSeparatorStyle">@style/ActionBarCompatSeparator</item>
+        <item name="actionbarCompatTextStyle">@style/ActionBarCompatText</item>
+    </style>
+
+    <!-- Start with White theme -->
+    <style name="Theme.HNDroid.Home" parent="style/Theme.HNDroid">
+    	<!-- 
+    		bg image
+    		 <item name="android:windowBackground">@drawable/background_noise</item>
+    	 -->
+    </style>
+    
+    <!-- 
+    <style name="Theme.HNDroid.HomeInverted" parent="style/Theme.HNDroid">
+    	<item name="android:background">#000</item>
+    	
+    </style>
+    -->
+
+    <style name="ActionBarCompat">
+        <item name="android:id">@id/actionbar_compat</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">@dimen/actionbar_compat_height</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@drawable/actionbar_compat_background</item>
+    </style>
+
+    <style name="ActionBarCompatButton">
+        <item name="android:layout_width">@dimen/actionbar_compat_height</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:background">@drawable/actionbar_compat_button</item>
+    </style>
+
+    <style name="ActionBarCompatProgressIndicator" parent="android:style/Widget.ProgressBar.Small">
+        <item name="android:indeterminate">true</item>
+    </style>
+
+    <style name="ActionBarCompatSeparator">
+        <item name="android:layout_width">2px</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:background">@drawable/actionbar_compat_separator</item>
+    </style>
+
+    <style name="ActionBarCompatText">
+        <item name="android:id">@id/actionbar_compat_text</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/actionbar_text</item>
+        <item name="android:shadowColor">#fff</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">0.00001</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="DashboardButton">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:drawablePadding">2dp</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/accent_1</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="ListItemTitle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textColor">@color/body_text_1</item>
+    </style>
+
+    <style name="ListItemSubtitle">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textColor">@color/body_text_2</item>
+    </style>
+
+    <style name="ListItemContainerBase">
+        <item name="android:minHeight">?android:attr/listPreferredItemHeight</item>
+    </style>
+
+    <!-- a simple list item is one whose container and content are the same view -->
+    <style name="SimpleListItem" parent="style/ListItemContainerBase">
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <!-- used for more complex list items, e.g. those with stars aligned to the top-right -->
+
+    <style name="ListItemContainer" parent="style/ListItemContainerBase" />
+
+    <style name="ListItemContent">
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+   
+
+    <!-- body content -->
+    
+    
+    <style name="TextHeaderSubComments">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/body_text_2</item>
+        <item name="android:maxLines">?attr/textHeaderMaxLines</item>
+        <item name="android:ellipsize">end</item>
+
+    </style>
+
+    <style name="TextHeader">
+        <item name="android:textSize">@dimen/text_size_xlarge</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/body_text_1</item>
+        <item name="android:maxLines">?attr/textHeaderMaxLines</item>
+        <item name="android:ellipsize">end</item>
+
+    </style>
+
+    <style name="TextHeaderSub">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/body_text_2</item>
+
+    </style>
+    
+    <style name="TextComment">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/body_text_1</item>
+
+    </style>
+    
+    <style name="TextHeaderSubTimeWhen">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/body_text_3</item>
+
+    </style>
+
+    <style name="TextHeader2">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/accent_1</item>
+
+    </style>
+
+    <style name="TextHeader3">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/body_text_1</item>
+
+    </style>
+
+    <style name="TextBody">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:lineSpacingMultiplier">1.1</item>
+        <item name="android:textColor">@color/body_text_1</item>
+
+    </style>
+
+    <style name="PushButton">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:background">@drawable/btn</item>
+    </style>
+
+
+</resources>

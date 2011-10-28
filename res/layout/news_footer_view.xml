@@ -1,0 +1,14 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/layout_root_more_footer"
+              android:orientation="horizontal"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:padding="10dp"
+              >
+    <Button android:id="@+id/get_more_button"
+		    android:layout_alignParentBottom="true"
+		    android:text=" More "
+		    android:layout_width="150dip"
+    		android:layout_height="40dip"
+		  />
+</LinearLayout>

@@ -1,0 +1,15 @@
+<sql>
+<statement>
+CREATE TABLE IF NOT EXISTS hackernews_saved (
+        _id INTEGER PRIMARY KEY AUTOINCREMENT, 
+        item_id INTEGER,
+        title VARCHAR(250), 
+        url VARCHAR(150), 
+        author VARCHAR(100), 
+        posted_date VARCHAR(100), 
+        points VARCHAR(100), 
+        comments VARCHAR(100),
+        created_date DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+</statement>
+</sql>

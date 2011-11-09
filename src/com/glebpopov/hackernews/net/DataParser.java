@@ -100,13 +100,15 @@ public class DataParser
 			return null;
 		}
 		JSONArray jsonData = getJsonData();
-		ArrayList<CommentItem> data = parseComments(jsonData);
+		ArrayList<CommentItem> data = parseComments(jsonData, -1);
         Log.d(TAG, "getComments: returning " + data.size() + " elements");
 		return data;
 	}
 	
-	public ArrayList<CommentItem> parseComments(JSONArray jsonData)
+	public ArrayList<CommentItem> parseComments(JSONArray jsonData, int parentId)
 	{
+		//Log.d(TAG, "parseComments: ParentID=" + parentID);
+		
 		ArrayList<CommentItem> data = new ArrayList<CommentItem>();
 		if (jsonData != null)
 		{
@@ -117,21 +119,23 @@ public class DataParser
 				item = new CommentItem();
 				try
 				{
-					int id = 0;
+					int id = -1;
 					try
 					{
-						id = Integer.parseInt(jsonData.getJSONObject(i).getString("item_id"));
+						id = Integer.parseInt(jsonData.getJSONObject(i).getString("id"));
 					} catch (Exception ex) {}
 					
+					item.setId(id);
+					item.setParentId(parentId);
 					item.setComment(jsonData.getJSONObject(i).getString("comment"));
 					item.setReplyId(jsonData.getJSONObject(i).getString("reply_id"));
 					item.setPostedDate(jsonData.getJSONObject(i).getString("time"));
 					item.setAuthor(jsonData.getJSONObject(i).getString("username"));
 					if (jsonData.getJSONObject(i).getJSONArray("children") != null)
 					{
-						item.setChildren(parseComments(jsonData.getJSONObject(i).getJSONArray("children")));
+						item.setChildren(parseComments(jsonData.getJSONObject(i).getJSONArray("children"), id));
 					}
-					item.setId(id);
+					
 				} catch (Exception ex)
 				{
 					Log.e(TAG, "parseComments: exception while parsing JSON data: " + ex);

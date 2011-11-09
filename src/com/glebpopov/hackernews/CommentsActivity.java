@@ -1,7 +1,6 @@
 package com.glebpopov.hackernews;
 
-import com.glebpopov.hackernews.fragments.CommentsFragment;
-import com.glebpopov.hackernews.fragments.NewsFragment;
+import com.glebpopov.hackernews.fragments.CommentsFragmentView;
 import com.glebpopov.hackernews.ui.BaseSinglePaneActivity;
 
 import android.content.Intent;
@@ -11,12 +10,12 @@ import android.util.Log;
 
 public class CommentsActivity extends BaseSinglePaneActivity {
     
-	private CommentsFragment fragment = null;
+	private CommentsFragmentView fragment = null;
 	private static final String TAG = "CommentsActivity";
 
 	@Override
     protected Fragment onCreatePane() {
-		fragment = new CommentsFragment(this);
+		fragment = new CommentsFragmentView(this);
 		return fragment;
 		
     }
@@ -31,7 +30,7 @@ public class CommentsActivity extends BaseSinglePaneActivity {
 		{
 			try
 			{
-				fragment = new CommentsFragment(this);
+				fragment = new CommentsFragmentView(this);
 				fragment.refreshData();
 				
 			} catch (Exception ex)

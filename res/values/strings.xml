@@ -17,7 +17,7 @@
     <string name="hn_url_newest">http://hndroidapi.appspot.com/newest</string>
     <string name="hn_url_best">http://hndroidapi.appspot.com/best</string>
     <string name="hn_comments_url">http://hndroidapi.appspot.com/nestedcomments/format/json/id/</string>
-    <string name="about_app">Build:\r\n2.1 Beta (10/25/11)\r\n\r\nAuthor:\r\nGleb Popov (gpopov@gmail.com)\r\n\r\nNotes:\r\n*Not affiliated with Y Combinator\r\n*Uses 3rd party API (http://hndroidapi.appspot.com)\r\n*Integrates with ViewText.org, Instapaper, getFavicon(g.etfv.co)\r\n\r\nThanks:\r\nSuan Aik Yeo (nested comments), Eric Kigathi (API data fetcher)</string>
+    <string name="about_app">Build:\r\n2.2 Beta (11/08/11)\r\n\r\nAuthor:\r\nGleb Popov (gpopov@gmail.com)\r\n\r\nNotes:\r\n*Not affiliated with Y Combinator\r\n*Uses 3rd party API (http://hndroidapi.appspot.com)\r\n*Integrates with ViewText.org, Instapaper, getFavicon(g.etfv.co)\r\n\r\nThanks:\r\nSuan Aik Yeo (nested comments), Eric Kigathi (API data fetcher)</string>
     <string name="warranty_info">The software is provided AS IS and the author makes NO WARRANTY or representation either express or implied as to its quality, accuracy, or fitness for a particular purpose.</string>
     
     <string-array name="saved_menu">

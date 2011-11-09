@@ -24,7 +24,21 @@ public class AskActivity extends BaseSinglePaneActivity
 	{
 		Log.d(TAG, "Refreshing Data...");
 		String startUpUrl = getResources().getString(R.string.hn_url_ask);
-		newsFragment.refreshData(startUpUrl);
+		if (newsFragment != null)
+		{
+			newsFragment.refreshData(startUpUrl);
+		} else
+		{
+			try
+			{
+				newsFragment = new NewsFragment(this, R.string.hn_url_ask);
+				newsFragment.refreshData(startUpUrl);
+				
+			} catch (Exception ex)
+			{
+				Log.e(TAG, "Unable to instantiate NewsFragment or refresh data");
+			}
+		}
 	}
 	
 	public void displayPreview(String url) {

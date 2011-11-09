@@ -14,6 +14,8 @@ import android.view.MenuItem;
  * A base activity that defers common functionality across app activities to an
  * {@link ActivityHelper}. This class shouldn't be used directly; instead, activities should
  * inherit from {@link BaseSinglePaneActivity} or {@link BaseMultiPaneActivity}.
+ * 
+ * Copied from Google IO App
  */
 public abstract class BaseActivity extends FragmentActivity {
     final ActivityHelper mActivityHelper = ActivityHelper.createInstance(this);

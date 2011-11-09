@@ -1,8 +1,21 @@
- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
+ <ScrollView 
+		android:id="@+id/scrllvwNo1" 
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content">
+		
+	 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:orientation="vertical"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:id="@+id/comments_header_layout"
+	    android:scrollbars="vertical"
+	    >
+    
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -34,9 +47,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/TextHeaderSubTimeWhen" />
-            
-	
-       	
-            
+          
     </RelativeLayout>
+    <TextView android:id="@+id/no_data_retrieved"
+		android:text="Unable to retrieve data. Please try again."
+		android:visibility="gone"
+      	android:indeterminate="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+      	style="@style/TextHeaderSub" />
+</LinearLayout>
+</ScrollView>
 </LinearLayout>

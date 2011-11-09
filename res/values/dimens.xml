@@ -1,6 +1,7 @@
 <resources>
 
     <!-- UI elements -->
+    <dimen name="line_break_height">1dp</dimen>
     <dimen name="colorstrip_height">6dp</dimen>
     <dimen name="actionbar_compat_height">45dp</dimen>
     <dimen name="whats_on_height">70dp</dimen>

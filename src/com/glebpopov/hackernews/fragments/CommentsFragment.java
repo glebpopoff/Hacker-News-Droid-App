@@ -1,6 +1,11 @@
 package com.glebpopov.hackernews.fragments;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
+
 import com.glebpopov.hackernews.R;
 import com.glebpopov.hackernews.domain.CommentItem;
 import com.glebpopov.hackernews.domain.NewsItem;
@@ -227,6 +232,7 @@ public class CommentsFragment extends ListFragment
 	private class CommentsItemAdapter extends ArrayAdapter<CommentItem> {
 
         private ArrayList<CommentItem> items;
+        private ArrayList<String> parentChildRegistry = new ArrayList<String>();
         private Context context;
 
         public CommentsItemAdapter(Context c, int textViewResourceId, ArrayList<CommentItem> items) {
@@ -236,17 +242,28 @@ public class CommentsFragment extends ListFragment
         }
         
         private void addChildItems(CommentItem parent, 
-        						   LinearLayout ll, 
-        						   LayoutInflater vi)
+        						   LinearLayout ll)
         {
         	if (parent.getChildren() != null && parent.getChildren().size() > 0)
         	{
-        		CommentItem childItem;
+        		LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                
+        		CommentItem childItem = null;
+        		String parentChildKey = null;
         	
 	        	for (int i=0;i<parent.getChildren().size();i++)
 	            {
-	        		//Log.d(TAG, "Adding Child IDs: " + parent.getChildren().get(i).getPostedDate());
 	        		childItem = parent.getChildren().get(i);
+	        		
+	        		parentChildKey = parent.getId() + "_" + childItem.getId();
+	        		
+	        		if (parentChildRegistry.contains(parentChildKey) ||
+	        				parent.getId() != childItem.getParentId()
+						)
+					{
+						break;
+					}
+	        		
 	        		View childView = vi.inflate(R.layout.fragment_comments, null);
 	        		TextView commentViewChild = (TextView) childView.findViewById(R.id.comment_comment);
 	                TextView hourViewChild = (TextView) childView.findViewById(R.id.comment_whenposted);
@@ -277,8 +294,10 @@ public class CommentsFragment extends ListFragment
 	                cll.setPadding(45, 0, 0, 0);
 	            	if (cll != null && childItem.getChildren() != null && childItem.getChildren().size() > 0)
 	            	{
-	            		addChildItems(childItem, cll, vi);
+	            		addChildItems(childItem, cll);
 	            	}
+	            	
+	            	parentChildRegistry.add(parentChildKey);
 	            }
         	}
         }
@@ -286,26 +305,43 @@ public class CommentsFragment extends ListFragment
         @Override
         public View getView(int position, View convertView, ViewGroup parent) 
         {
+        	Log.d(TAG, "getView: Position" + position);
         	try
         	{ 
-        		View v = convertView;
+        		/*
+        		 * View v;
         		LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                if (v == null) {
-                    v = vi.inflate(R.layout.fragment_comments, null);
+                if (convertView == null) {
+                	convertView = vi.inflate(R.layout.fragment_comments, null);
+                	v = convertView;
+                	convertView.setTag(v);
+                } else
+                {
+                	v = (View) convertView.getTag();
                 }
+        		 */
+        		
+        		View v ;
+        		LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                if (convertView == null)
+        		{
+                	v = vi.inflate(R.layout.fragment_comments, null);
+        		} else
+        		{
+        			v = convertView;
+        		}
                 
                 CommentItem o = items.get(position);
+                Log.d(TAG, "getView: ID=" + o.getId() + ";Author=" + o.getAuthor() + ";Children Size=" + o.getChildren().size());
                 if (o != null && o.getComment() != null && o.getComment().trim().length() > 0) 
                 {
-                	//Log.d(TAG, "Setting up UI elements");
-                    TextView commentView = (TextView) v.findViewById(R.id.comment_comment);
+                	TextView commentView = (TextView) v.findViewById(R.id.comment_comment);
                     TextView hourView = (TextView) v.findViewById(R.id.comment_whenposted);
                     TextView authorView = (TextView) v.findViewById(R.id.comment_author);
                     LinearLayout ll = (LinearLayout) v.findViewById(R.id.comments_layout);
                     
                     if (commentView != null) 
                     {
-                    	//Log.d(TAG, "Comment: " + o.getComment());
                     	commentView.setText(o.getComment()); 
                     	Linkify.addLinks(commentView, Linkify.ALL);
                     }
@@ -313,7 +349,7 @@ public class CommentsFragment extends ListFragment
                     if (ll != null && o.getChildren() != null && o.getChildren().size() > 0)
                     {
                     	o.setColor(Color.WHITE);
-                    	addChildItems(o, ll, vi);
+                    	addChildItems(o, ll);
                     }
                     
                     if (hourView != null) 

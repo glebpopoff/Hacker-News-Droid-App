@@ -23,7 +23,21 @@ public class BestActivity extends BaseSinglePaneActivity
 	{
 		Log.d(TAG, "Refreshing Data...");
 		String startUpUrl = getResources().getString(R.string.hn_url_best);
-		newsFragment.refreshData(startUpUrl);
+		if (newsFragment != null)
+		{
+			newsFragment.refreshData(startUpUrl);
+		} else
+		{
+			try
+			{
+				newsFragment = new NewsFragment(this, R.string.hn_url_best);
+				newsFragment.refreshData(startUpUrl);
+				
+			} catch (Exception ex)
+			{
+				Log.e(TAG, "Unable to instantiate NewsFragment or refresh data");
+			}
+		}
 	}
 	
 	public void displayPreview(String url) {

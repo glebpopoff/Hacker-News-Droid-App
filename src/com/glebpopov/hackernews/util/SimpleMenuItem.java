@@ -11,6 +11,8 @@ import android.view.View;
  * A <em>really</em> dumb implementation of the {@link MenuItem} interface, that's only useful for
  * our old-actionbar purposes. See <code>com.android.internal.view.menu.MenuItemImpl</code> in
  * AOSP for a more complete implementation.
+ * 
+ * Copied from Google IO
  */
 public class SimpleMenuItem implements MenuItem {
 

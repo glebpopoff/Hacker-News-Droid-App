@@ -3,6 +3,7 @@ package com.glebpopov.hackernews.domain;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import com.glebpopov.hackernews.util.StringEscapeUtils;
 
 import android.text.Html;
 import android.util.Log;
@@ -16,12 +17,12 @@ public class CommentItem
 	private int color;
 	private ArrayList<CommentItem> childrenContainer;
 	
-	public int getParentID()
+	public int getParentId()
 	{
 		return parentID;
 	}
 	
-	public void setParentID(int i)
+	public void setParentId(int i)
 	{
 		parentID = i;
 	}
@@ -96,7 +97,9 @@ public class CommentItem
 			}
 			try {
 				comment = comment.replace("\\", "");
-				comment = comment.replace("&amp;#62;", ">");
+				comment = StringEscapeUtils.unescapeHtml(comment);
+				comment = comment.replace("&#62;", ">");
+				comment = comment.replace("&#60;", "<");
 			} catch (Exception e) 
 			{
 				Log.w(TAG, "Exception(s) replacing char in comment: " + e);

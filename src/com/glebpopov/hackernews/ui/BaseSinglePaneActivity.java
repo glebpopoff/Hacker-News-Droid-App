@@ -3,7 +3,10 @@ package com.glebpopov.hackernews.ui;
 import com.glebpopov.hackernews.R;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
@@ -20,6 +23,16 @@ public abstract class BaseSinglePaneActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        //check to see if we need to enable night mode
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        if (sharedPref.getBoolean("app_nite_mode", false))
+        {
+        	setTheme(R.style.Theme_HNDroid_HomeInverse);
+        } else
+        {
+        	setTheme(R.style.Theme_HNDroid_Home);
+        }
         setContentView(R.layout.activity_singlepane_empty);
         getActivityHelper().setupActionBar(getTitle());
 

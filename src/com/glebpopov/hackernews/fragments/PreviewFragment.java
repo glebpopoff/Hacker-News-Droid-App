@@ -2,8 +2,11 @@ package com.glebpopov.hackernews.fragments;
 
 import com.glebpopov.hackernews.R;
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,7 +22,9 @@ public class PreviewFragment extends Fragment
 	private String TAG = "PreviewFragment";
 	private String resourceUrl = null;
 	private WebView mWebView;
+	protected boolean isNiteMode = false;
     private View mLoadingSpinner;
+    protected SharedPreferences sharedPref = null;
 	
 	public PreviewFragment()
 	{
@@ -46,21 +51,44 @@ public class PreviewFragment extends Fragment
         							resourceUrl.toLowerCase().startsWith("https://")
         							))
     	{
+        	if (sharedPref == null)
+        	{
+        		sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        	}
+            
+            if (sharedPref.getBoolean("app_nite_mode", false))
+            {
+            	Log.d(TAG, "App Nite Mode");
+        		isNiteMode = true;
+            }
+        	
 	        // For some reason, if we omit this, NoSaveStateFrameLayout thinks we are
 	        // FILL_PARENT / WRAP_CONTENT, making the progress bar stick to the top of the activity.
 	        root.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
 	                ViewGroup.LayoutParams.FILL_PARENT));
 	
-	        mLoadingSpinner = root.findViewById(R.id.loading_spinner);
+	        if (isNiteMode)
+            {
+	        	root.setBackgroundColor(Color.BLACK);
+            }
 	        
+	        mLoadingSpinner = root.findViewById(R.id.loading_spinner);
 	        mWebView.setWebViewClient(mWebViewClient);
 	
 	        mWebView.post(new Runnable() {
 	            public void run() {
 	                mWebView.getSettings().setJavaScriptEnabled(true);
 	                mWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(false);
+	                
 	                try {
 	                    mWebView.loadUrl("http://viewtext.org/article?url=" + resourceUrl);
+	                    
+	                    if (isNiteMode)
+	                    {
+	                    	mWebView.setBackgroundColor(0);
+	        	        	mWebView.invalidate(); 
+	                    }
+	                    
 	                } catch (Exception e) {
 	                    Log.e(TAG, "Could not construct the URL", e);
 	                    mNoDataView.setVisibility(View.VISIBLE);
@@ -93,6 +121,15 @@ public class PreviewFragment extends Fragment
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
+            
+            if (isNiteMode)
+            {
+            mWebView.loadUrl("javascript:(function() { " +  
+                    "document.getElementsByTagName('body')[0].style.background = 'none repeat scroll 0 0 #000000'; " +  
+                    "document.getElementsByTagName('body')[0].style.color = '#FFFFFF';" +
+                    "document.getElementsByTagName('H1')[0].style.color = '#FFFFFF';" +
+            		"})()");  
+            }
             mLoadingSpinner.setVisibility(View.GONE);
             mWebView.setVisibility(View.VISIBLE);
         }

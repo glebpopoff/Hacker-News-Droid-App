@@ -1,5 +1,6 @@
 <resources>
     <color name="actionbar_text">#000000</color>
+    <color name="actionbar_text_inverted">#ffffff</color>
 
     <color name="body_text_1">#ff000000</color>
     <color name="body_text_1_inv">#fff</color>
@@ -7,7 +8,7 @@
     <color name="body_text_3">#FF660000</color>
     <color name="body_text_disabled">#66000000</color>
 
-    <color name="body_text_1_inverse">#ffffffff</color>
+    <color name="body_text_1_inverse">#ffffff</color>
     <color name="body_text_2_inverse">#99ffffff</color>
 
     <color name="accent_1">#ff29549f</color>

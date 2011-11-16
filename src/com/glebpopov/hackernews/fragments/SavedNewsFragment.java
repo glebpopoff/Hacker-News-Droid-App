@@ -22,10 +22,13 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -58,6 +61,8 @@ public class SavedNewsFragment extends ListFragment
 	private CheckBox mRememberLogin;
 	private AppSettings appSettings = null;
 	private int instapaperReturnCode = -1;
+	protected SharedPreferences sharedPref = null;
+	protected boolean isNiteMode = false;
 	
 	public SavedNewsFragment()
 	{
@@ -145,6 +150,22 @@ public class SavedNewsFragment extends ListFragment
 	public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Log.d(TAG, "onActivityCreated");
+        
+        if (sharedPref == null)
+    	{
+    		sharedPref = PreferenceManager.getDefaultSharedPreferences(mActivity);
+    	}
+        
+        if (sharedPref.getBoolean("app_nite_mode", false))
+        {
+        	Log.d(TAG, "App Nite Mode");
+    		isNiteMode = true;
+        }
+        
+        if (isNiteMode)
+    	{
+    		getListView().setBackgroundColor(Color.BLACK);
+    	}
         
         retrieveSavedData();
         
@@ -494,6 +515,11 @@ public class SavedNewsFragment extends ListFragment
                 if (v == null) {
                     LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     v = vi.inflate(R.layout.fragment_news, null);
+                    
+                    if (isNiteMode)
+                    {
+                    	v.setBackgroundColor(Color.BLACK);
+                    }
                 }
                 NewsItem o = items.get(position);
                 if (o != null && o.getTitle() != null) 
@@ -510,31 +536,55 @@ public class SavedNewsFragment extends ListFragment
 	                    if (domainView != null && o.getDomain() != null)
 	                    {
 	                    	domainView.setText(o.getDomainReadable());
+	                    	if (isNiteMode)
+	                    	{
+	                    		domainView.setBackgroundColor(Color.TRANSPARENT);
+	                    	}
 	                    }
 	                    
 	                    if (titleView != null) 
 	                    {
-	                    	titleView.setText(o.getTitle());                            
+	                    	titleView.setText(o.getTitle());  
+	                    	if (isNiteMode)
+	                    	{
+	                    		titleView.setTextColor(Color.WHITE);
+	                    	}
 	                    }
 	                    
 	                    if (hourView != null && o.getPostedDate() != null) 
 	                    {
-	                    	hourView.setText(o.getPostedDate());                           
+	                    	hourView.setText(o.getPostedDate());  
+	                    	if (isNiteMode)
+	                    	{
+	                    		hourView.setTextColor(Color.LTGRAY);
+	                    	}
 	                    }
 	                    
 	                    if (authorView != null && o.getAuthor() != null) 
 	                    {
 	                    	authorView.setText(o.getAuthor() + " | ");
+	                    	if (isNiteMode)
+	                    	{
+	                    		authorView.setTextColor(Color.LTGRAY);
+	                    	}
 	                    }
 	                    
 	                    if (commentsView != null && o.getComments() != null) 
 	                    {
 	                    	commentsView.setText(o.getComments());
+	                    	if (isNiteMode)
+	                    	{
+	                    		commentsView.setTextColor(Color.LTGRAY);
+	                    	}
 	                    }
 	                    
 	                    if (pointView != null && o.getPoints() != null) 
 	                    {
-	                    	pointView.setText(o.getPoints());                            
+	                    	pointView.setText(o.getPoints());    
+	                    	if (isNiteMode)
+	                    	{
+	                    		pointView.setTextColor(Color.LTGRAY);
+	                    	}
 	                    }
 	                }                  
                 }

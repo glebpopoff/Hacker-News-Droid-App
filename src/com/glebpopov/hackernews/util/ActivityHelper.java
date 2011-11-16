@@ -10,7 +10,9 @@ import com.glebpopov.hackernews.R;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -34,6 +36,7 @@ import android.widget.TextView;
 public class ActivityHelper {
     private static final String TAG = "ActivityHelper";
 	protected Activity mActivity;
+	protected SharedPreferences sharedPref = null;
 
     /**
      * Factory method for creating {@link ActivityHelper} objects for a given activity. Depending
@@ -182,9 +185,17 @@ public class ActivityHelper {
 
         if (title != null) {
             // Add Home button
-            addActionButtonCompat(R.drawable.ic_title_home, R.string.description_home,
-                    homeClickListener, true);
-
+        	if (sharedPref == null)
+        	{
+        		sharedPref = PreferenceManager.getDefaultSharedPreferences(mActivity);
+        	}
+        	if (sharedPref.getBoolean("app_nite_mode", false))
+            {
+            	addActionButtonCompat(R.drawable.ic_title_home_inversed, R.string.description_home, homeClickListener, true);
+            } else
+            {
+            	addActionButtonCompat(R.drawable.ic_title_home, R.string.description_home, homeClickListener, true);
+            }
             // Add title text
             TextView titleText = new TextView(mActivity, null, R.attr.actionbarCompatTextStyle);
             titleText.setLayoutParams(springLayoutParams);
@@ -205,23 +216,6 @@ public class ActivityHelper {
 
         //setActionBarColor(color);
     }
-
-    /**
-     * Sets the action bar color to the given color.
-     
-    public void setActionBarColor(int color) {
-        if (color == 0) {
-            return;
-        }
-
-        final View colorstrip = null;//mActivity.findViewById(R.id.colorstrip);
-        if (colorstrip == null) {
-            return;
-        }
-
-        colorstrip.setBackgroundColor(color);
-    }
-    */
 
     /**
      * Sets the action bar title to the given string.
@@ -321,6 +315,21 @@ public class ActivityHelper {
         });
 
         actionBar.addView(separator);
+        if (sharedPref == null)
+    	{
+    		sharedPref = PreferenceManager.getDefaultSharedPreferences(mActivity);
+    	}
+        if (sharedPref != null && sharedPref.getBoolean("app_nite_mode", false))
+        {
+        	if (item.getItemId() == R.id.menu_more)
+        	{
+        		actionButton.setImageDrawable(mActivity.getResources().getDrawable(R.drawable.ic_menu_more_inversed));
+        	}
+        	if (item.getItemId() == R.id.menu_refresh)
+        	{
+        		actionButton.setImageDrawable(mActivity.getResources().getDrawable(R.drawable.ic_title_refresh_inversed));
+        	}
+        }
         actionBar.addView(actionButton);
 
         if (item.getItemId() == R.id.menu_refresh) {
@@ -339,6 +348,7 @@ public class ActivityHelper {
             indicator.setVisibility(View.GONE);
             indicator.setId(R.id.menu_refresh_progress);
             actionBar.addView(indicator);
+            
         }
 
         return actionButton;
@@ -358,6 +368,6 @@ public class ActivityHelper {
         }
         if (refreshIndicator != null) {
             refreshIndicator.setVisibility(refreshing ? View.VISIBLE : View.GONE);
-        }
+        } 
     }
 }

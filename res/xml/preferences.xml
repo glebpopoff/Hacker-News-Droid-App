@@ -8,6 +8,12 @@
 			android:title="Go to URL on Tap"
 			android:summary="Go to HN Comments or URL on item tap" 
 			android:defaultValue="true" />
+			
+		<com.glebpopov.hackernews.settings.ThemeSwitcherSetting
+			android:key="app_nite_mode"  
+			android:title="Enable Night Mode"
+			android:summary="Change app theme to inverse mode" 
+			android:defaultValue="false" />
 		
 		<com.glebpopov.hackernews.settings.ClearSavedContent  
 			android:key="clear_saved_content"

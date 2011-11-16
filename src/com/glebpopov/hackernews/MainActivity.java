@@ -9,10 +9,12 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.util.Linkify;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -35,7 +37,6 @@ public class MainActivity extends BaseSinglePaneActivity {
 	@Override
     protected Fragment onCreatePane() {
 		Log.d(TAG, "onCreatePane");
-		//setTheme(R.style.Theme_HNDroid_HomeInverted);
 		newsFragment = new NewsFragment(this, R.string.hn_url_news);
 		return newsFragment;
 		
@@ -86,7 +87,7 @@ public class MainActivity extends BaseSinglePaneActivity {
 	        case DIALOG_MENU_ID:
 	        	final CharSequence[] items = getResources().getStringArray(R.array.actionbar_menu);
 	
-	        	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	        	AlertDialog.Builder builder = new AlertDialog.Builder(this);// new ContextThemeWrapper(this, R.style.AlertDialogInverse));
 	        	builder.setTitle("Hacker News");
 	        	builder.setItems(items, new DialogInterface.OnClickListener() {
 	        	    public void onClick(DialogInterface dialog, int item) {

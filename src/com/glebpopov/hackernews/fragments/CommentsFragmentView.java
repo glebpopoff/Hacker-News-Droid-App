@@ -6,16 +6,23 @@ import com.glebpopov.hackernews.R;
 import com.glebpopov.hackernews.domain.CommentItem;
 import com.glebpopov.hackernews.domain.NewsItem;
 import com.glebpopov.hackernews.net.DataParser;
+import com.glebpopov.hackernews.util.ImageLoader;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +36,9 @@ public class CommentsFragmentView extends Fragment
 	private Activity mActivity;
 	private View mCommentHeaderView;
 	private LayoutInflater mInflator;
+	private ImageLoader imageLoader = null;
+	protected SharedPreferences sharedPref = null;
+	protected boolean isNiteMode = false;
 	
 	public CommentsFragmentView()
 	{
@@ -61,31 +71,100 @@ public class CommentsFragmentView extends Fragment
             	return null;
             }
             
-        	//add headerview
-        	if (mCommentHeaderView != null)
+            if (sharedPref == null)
         	{
-        		TextView storyTitleView = (TextView) mCommentHeaderView.findViewById(R.id.story_title);
-                TextView storyPostedWhenView = (TextView) mCommentHeaderView.findViewById(R.id.story_hour);
-                TextView storyDomainView = (TextView) mCommentHeaderView.findViewById(R.id.story_domain);
+        		sharedPref = PreferenceManager.getDefaultSharedPreferences(mActivity);
+        	}
+            
+            if (sharedPref.getBoolean("app_nite_mode", false))
+            {
+            	Log.d(TAG, "App Nite Mode");
+        		isNiteMode = true;
+        		container.setBackgroundColor(Color.BLACK);
+            }
+            
+        	//add headerview
+        	if (mCommentHeaderView != null && storyItem != null)
+        	{
+        		TextView titleView = (TextView) mCommentHeaderView.findViewById(R.id.news_title);
+                TextView hourView = (TextView) mCommentHeaderView.findViewById(R.id.news_hour);
+                TextView authorView = (TextView) mCommentHeaderView.findViewById(R.id.news_author);
+                TextView commentsView = (TextView) mCommentHeaderView.findViewById(R.id.news_comments);
+                TextView pointView = (TextView) mCommentHeaderView.findViewById(R.id.news_points);
+                TextView domainView = (TextView) mCommentHeaderView.findViewById(R.id.news_domain);
+                
                 TextView noDataView = (TextView) mCommentHeaderView.findViewById(R.id.no_data_retrieved);
     			noDataView.setVisibility(View.GONE);
     			
-            	if (storyTitleView != null && storyItem.getTitle() != null)
+    			if (isNiteMode)
+    			{
+    				mCommentHeaderView.setBackgroundColor(Color.BLACK);
+    			}
+    			
+    			if (domainView != null && storyItem.getDomain() != null)
                 {
-                	storyTitleView.setText(storyItem.getTitle());
-                	storyTitleView.setVisibility(View.VISIBLE);
+                	domainView.setText(storyItem.getDomainReadable());
+                	domainView.setOnClickListener(new View.OnClickListener() {
+        	            public void onClick(View v) {
+        	            	final Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(storyItem.getUrl()));
+        					startActivity(browserIntent);
+        	            }
+        	        });
+                	if (isNiteMode)
+                	{
+                		domainView.setBackgroundColor(Color.TRANSPARENT);
+                	}
                 }
                 
-                if (storyPostedWhenView != null && storyItem.getPostedDate() != null)
+                if (titleView != null) 
                 {
-                	storyPostedWhenView.setText(storyItem.getPostedDate());
-                	storyPostedWhenView.setVisibility(View.VISIBLE);
+                	titleView.setText(storyItem.getTitle());    
+                	titleView.setOnClickListener(new View.OnClickListener() {
+        	            public void onClick(View v) {
+        	            	final Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(storyItem.getUrl()));
+        					startActivity(browserIntent);
+        	            }
+        	        });
+                	if (isNiteMode)
+                	{
+                		titleView.setTextColor(Color.WHITE);
+                	}
                 }
                 
-                if (storyDomainView != null && storyItem.getAuthor() != null)
+                if (hourView != null && storyItem.getPostedDate() != null) 
                 {
-                	storyDomainView.setText(storyItem.getAuthor());
-                	storyDomainView.setVisibility(View.VISIBLE);
+                	hourView.setText(storyItem.getPostedDate());    
+                	if (isNiteMode)
+                	{
+                		hourView.setTextColor(Color.LTGRAY);
+                	}
+                }
+                
+                if (authorView != null && storyItem.getAuthor() != null) 
+                {
+                	authorView.setText(storyItem.getAuthor() + " | ");
+                	if (isNiteMode)
+                	{
+                		authorView.setTextColor(Color.LTGRAY);
+                	}
+                }
+                
+                if (commentsView != null && storyItem.getComments() != null) 
+                {
+                	commentsView.setText(storyItem.getComments());
+                	if (isNiteMode)
+                	{
+                		commentsView.setTextColor(Color.LTGRAY);
+                	}
+                }
+                
+                if (pointView != null && storyItem.getPoints() != null) 
+                {
+                	pointView.setText(storyItem.getPoints()); 
+                	if (isNiteMode)
+                	{
+                		pointView.setTextColor(Color.LTGRAY);
+                	}
                 }
                 
         		Log.d(TAG, "Adding Header View");
@@ -94,6 +173,16 @@ public class CommentsFragmentView extends Fragment
         	
         	//get data and build the view
 	        downloadData();
+	        
+	        if (mCommentHeaderView != null && storyItem.getFavIcon() != null && imageLoader != null)
+            {
+	        	ImageView imageView = (ImageView) mCommentHeaderView.findViewById(R.id.news_image);
+	        	if (imageView != null)
+	        	{
+	        		//lazy load images
+	        		imageLoader.DisplayImage(storyItem.getFavIcon(), mActivity, imageView);
+	        	}
+            }
         } else
         {
         	Log.d(TAG, "getComments: invalid story id");
@@ -106,9 +195,14 @@ public class CommentsFragmentView extends Fragment
 	public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         
+        if (isNiteMode)
+    	{
+    		getView().setBackgroundColor(Color.BLACK);
+    	}
     }
 	
 	private void downloadData() {
+		imageLoader = new ImageLoader(mActivity);
 		Runnable newsRetriever = new Runnable(){
             @Override
             public void run() {
@@ -149,6 +243,11 @@ public class CommentsFragmentView extends Fragment
             		
             		LinearLayout ll = (LinearLayout) mCommentHeaderView.findViewById(R.id.comments_header_layout);
             		
+            		if (isNiteMode)
+            		{
+            			ll.setBackgroundColor(Color.BLACK);
+            		}
+            		
                 	for (int i=0;i<data.size();i++)
                 	{
                 		CommentItem o = data.get(i);
@@ -160,15 +259,30 @@ public class CommentsFragmentView extends Fragment
 	                        TextView authorView = (TextView) childView.findViewById(R.id.comment_author);
 	                        LinearLayout llChild = (LinearLayout) childView.findViewById(R.id.comments_layout);
 	                        
+	                        if (isNiteMode)
+	                    	{
+	                        	childView.setBackgroundColor(Color.BLACK);
+	                    	}
+	                        
 	                        if (commentView != null) 
 	                        {
 	                        	commentView.setText(o.getComment()); 
 	                        	Linkify.addLinks(commentView, Linkify.ALL);
+	                        	if (isNiteMode)
+	                        	{
+	                        		commentView.setTextColor(Color.WHITE);
+	                        	}
 	                        }
 	                        
 	                        if (ll != null && o.getChildren() != null && o.getChildren().size() > 0)
 	                        {
-	                        	o.setColor(Color.WHITE);
+	                        	if (isNiteMode)
+	                        	{
+	                        		o.setColor(Color.BLACK);
+	                        	} else
+                        		{
+                        			o.setColor(Color.WHITE);
+                        		}
 	                        	addChildItems(o, llChild);
 	                        }
 	                        
@@ -249,9 +363,24 @@ public class CommentsFragmentView extends Fragment
                 if (commentViewChild != null) 
                 {
                 	commentViewChild.setText(childItem.getComment()); 
-                	int color = (parent.getColor() == Color.WHITE) ?
+                	int color = -1;
+                	if (isNiteMode)
+                	{
+                		if (parent.getColor() == Color.BLACK)
+                		{
+                			color = Color.WHITE;
+                			commentViewChild.setTextColor(Color.BLACK);
+                		} else
+                		{
+                			color = Color.BLACK;
+                			commentViewChild.setTextColor(Color.WHITE);
+                		}
+                	} else
+            		{
+                		color = (parent.getColor() == Color.WHITE) ?
                 				Color.LTGRAY : 
                 				Color.WHITE;
+            		}
                 	commentViewChild.setBackgroundColor(color);
                 	childItem.setColor(color);
                 	Linkify.addLinks(commentViewChild, Linkify.ALL);

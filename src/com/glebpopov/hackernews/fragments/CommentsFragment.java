@@ -38,6 +38,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * This class isn't really being used and replaced by CommentsFragmentsView
+ * At some point I should just remove this file....
+ * 
+ */
 public class CommentsFragment extends ListFragment 
 {
 	private String TAG = "CommentsFragment";
@@ -60,7 +65,7 @@ public class CommentsFragment extends ListFragment
 	
 	public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        storyItem = (NewsItem) getActivity().getIntent().getSerializableExtra("story_item");
+        /*storyItem = (NewsItem) getActivity().getIntent().getSerializableExtra("story_item");
         if (storyItem != null && storyItem.getId() > 0 && storyItem.getTitle() != null)
         {
         	if (mActivity == null)
@@ -112,6 +117,7 @@ public class CommentsFragment extends ListFragment
         	Log.d(TAG, "getComments: invalid story id");
     		setEmptyText("No data returned");
         }
+        */
     }
 	
 	private void downloadData() {

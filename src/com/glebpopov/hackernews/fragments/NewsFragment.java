@@ -27,6 +27,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -60,13 +61,15 @@ public class NewsFragment extends ListFragment
 	private NewsItemAdapter mAdapter = null;
 	private Activity mActivity;
 	private int dataUrlResource;
-	public String nextDataUrl = null;
+	private String nextDataUrl = null;
 	private TextView mEditUsername, mEditPassword;
 	private Button mInstapaperButton;
 	private Dialog mInstapaperDialog;
 	private CheckBox mRememberLogin;
 	private AppSettings appSettings = null;
 	private int instapaperReturnCode = -1;
+	protected SharedPreferences sharedPref = null;
+	protected boolean isNiteMode = false;
 	
 	private View.OnClickListener loadMoreListener = new View.OnClickListener() {
         public void onClick(View view) {
@@ -122,7 +125,6 @@ public class NewsFragment extends ListFragment
             	{
             		Log.d(TAG, "getNewsItems: no data returned");
             		setEmptyText("Unable to retrieve data. Please try again.");
-            		//Toast.makeText(getActivity(), R.string.toast_now_not_visible, Toast.LENGTH_SHORT).show();
             	}
             	
             	mAdapter = new NewsItemAdapter(mActivity, R.id.header_news, data);
@@ -151,6 +153,17 @@ public class NewsFragment extends ListFragment
         	return;
         }
         
+        if (sharedPref == null)
+    	{
+    		sharedPref = PreferenceManager.getDefaultSharedPreferences(mActivity);
+    	}
+        
+        if (sharedPref.getBoolean("app_nite_mode", false))
+        {
+        	Log.d(TAG, "App Nite Mode");
+    		isNiteMode = true;
+        }
+    	
         //add footerview
     	LayoutInflater vi = (LayoutInflater)mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = vi.inflate(R.layout.news_footer_view, null);
@@ -162,7 +175,13 @@ public class NewsFragment extends ListFragment
         		Log.d(TAG, "Adding Footer View");
         		b.setVisibility(View.VISIBLE);
             	b.setOnClickListener(loadMoreListener);
-    		
+            	
+            	if (isNiteMode)
+            	{
+            		v.setBackgroundColor(Color.BLACK);
+            		getListView().setBackgroundColor(Color.BLACK);
+            	}
+            	
             	getListView().addFooterView(v);
         	}
     	}
@@ -184,7 +203,8 @@ public class NewsFragment extends ListFragment
 		if (item != null)
 		{
 			menu.setHeaderTitle(item.getTitle());
-	        Log.d(TAG, "Title: " + item.getTitle());
+			
+			Log.d(TAG, "Title: " + item.getTitle());
 		    String[] menuItems = getResources().getStringArray(R.array.article_menu);
 		    for (int i = 0; i<menuItems.length; i++) 
 		    {
@@ -563,6 +583,10 @@ public class NewsFragment extends ListFragment
 	            	LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	                v = vi.inflate(R.layout.fragment_news, null);
 	            }
+	            if (isNiteMode)
+	            {
+	            	v.setBackgroundColor(Color.BLACK);
+	            }
 	            NewsItem o = items.get(position);
 	            if (o != null && 
 	            	o.getTitle() != null) 
@@ -586,31 +610,55 @@ public class NewsFragment extends ListFragment
 	                    if (domainView != null && o.getDomain() != null)
 	                    {
 	                    	domainView.setText(o.getDomainReadable());
+	                    	if (isNiteMode)
+	                    	{
+	                    		domainView.setBackgroundColor(Color.TRANSPARENT);
+	                    	}
 	                    }
 	                    
 	                    if (titleView != null) 
 	                    {
-	                    	titleView.setText(o.getTitle());                            
+	                    	titleView.setText(o.getTitle());     
+	                    	if (isNiteMode)
+	                    	{
+	                    		titleView.setTextColor(Color.WHITE);
+	                    	}
 	                    }
 	                    
 	                    if (hourView != null && o.getPostedDate() != null) 
 	                    {
-	                    	hourView.setText(o.getPostedDate());                           
+	                    	hourView.setText(o.getPostedDate()); 
+	                    	if (isNiteMode)
+	                    	{
+	                    		hourView.setTextColor(Color.LTGRAY);
+	                    	}
 	                    }
 	                    
 	                    if (authorView != null && o.getAuthor() != null) 
 	                    {
 	                    	authorView.setText(o.getAuthor() + " | ");
+	                    	if (isNiteMode)
+	                    	{
+	                    		authorView.setTextColor(Color.LTGRAY);
+	                    	}
 	                    }
 	                    
 	                    if (commentsView != null && o.getComments() != null) 
 	                    {
 	                    	commentsView.setText(o.getComments());
+	                    	if (isNiteMode)
+	                    	{
+	                    		commentsView.setTextColor(Color.LTGRAY);
+	                    	}
 	                    }
 	                    
 	                    if (pointView != null && o.getPoints() != null) 
 	                    {
-	                    	pointView.setText(o.getPoints());                            
+	                    	pointView.setText(o.getPoints());  
+	                    	if (isNiteMode)
+	                    	{
+	                    		pointView.setTextColor(Color.LTGRAY);
+	                    	}
 	                    }
 	                }
 	                

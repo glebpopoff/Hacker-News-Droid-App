@@ -17,6 +17,15 @@
         <item name="actionbarCompatSeparatorStyle">@style/ActionBarCompatSeparator</item>
         <item name="actionbarCompatTextStyle">@style/ActionBarCompatText</item>
     </style>
+    
+
+    <style name="AlertDialogInverse" parent="@android:style/Theme.Dialog">
+        <!--  
+        <item name="android:background">#FFFFFF</item>
+        <item name="menuItemTextColor">#008</item>
+        -->
+    </style>
+    
 
     <!-- Start with White theme -->
     <style name="Theme.HNDroid.Home" parent="style/Theme.HNDroid">
@@ -26,12 +35,11 @@
     	 -->
     </style>
     
-    <!-- 
-    <style name="Theme.HNDroid.HomeInverted" parent="style/Theme.HNDroid">
-    	<item name="android:background">#000</item>
-    	
+    <style name="Theme.HNDroid.HomeInverse" parent="style/Theme.HNDroid">
+    	<!--  this kills context menus and option menus b/c it's impossible to override itemTextColor<item name="android:background">#000000</item> -->
+    	<item name="actionbarCompatTextStyle">@style/ActionBarCompatTextInverse</item>
+    	<item name="actionbarCompatButtonStyle">@style/ActionBarCompatButtonInverse</item>
     </style>
-    -->
 
     <style name="ActionBarCompat">
         <item name="android:id">@id/actionbar_compat</item>
@@ -47,6 +55,13 @@
         <item name="android:scaleType">center</item>
         <item name="android:background">@drawable/actionbar_compat_button</item>
     </style>
+    
+    <style name="ActionBarCompatButtonInverse">
+        <item name="android:layout_width">@dimen/actionbar_compat_height</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:background">#000</item>
+    </style>
 
     <style name="ActionBarCompatProgressIndicator" parent="android:style/Widget.ProgressBar.Small">
         <item name="android:indeterminate">true</item>
@@ -56,6 +71,12 @@
         <item name="android:layout_width">2px</item>
         <item name="android:layout_height">fill_parent</item>
         <item name="android:background">@drawable/actionbar_compat_separator</item>
+    </style>
+    
+    <style name="ActionBarCompatSeparatorInverse">
+        <item name="android:layout_width">2px</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:background">#fff</item>
     </style>
 
     <style name="ActionBarCompatText">
@@ -75,6 +96,11 @@
         <item name="android:shadowRadius">0.00001</item>
         <item name="android:singleLine">true</item>
         <item name="android:ellipsize">end</item>
+    </style>
+    
+    <style name="ActionBarCompatTextInverse" parent="style/ActionBarCompatText">
+        <item name="android:background">#000</item>
+        <item name="android:textColor">#fff</item>
     </style>
 
     <style name="DashboardButton">
@@ -141,6 +167,15 @@
         <item name="android:textSize">@dimen/text_size_xlarge</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/body_text_1</item>
+        <item name="android:maxLines">?attr/textHeaderMaxLines</item>
+        <item name="android:ellipsize">end</item>
+
+    </style>
+    
+    <style name="TextHeaderInverse">
+        <item name="android:textSize">@dimen/text_size_xlarge</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/body_text_1_inverse</item>
         <item name="android:maxLines">?attr/textHeaderMaxLines</item>
         <item name="android:ellipsize">end</item>
 

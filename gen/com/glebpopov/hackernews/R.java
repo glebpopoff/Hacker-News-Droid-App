@@ -155,20 +155,21 @@ containing a value of this type.
         public static final int trackAbstractMaxLines=0x7f010006;
     }
     public static final class color {
-        public static final int accent_1=0x7f070008;
+        public static final int accent_1=0x7f070009;
         public static final int actionbar_text=0x7f070000;
-        public static final int background_1=0x7f07000a;
-        public static final int block_column_2=0x7f07000c;
-        public static final int block_column_3=0x7f07000d;
-        public static final int body_text_1=0x7f070001;
-        public static final int body_text_1_inv=0x7f070002;
-        public static final int body_text_1_inverse=0x7f070006;
-        public static final int body_text_2=0x7f070003;
-        public static final int body_text_2_inverse=0x7f070007;
-        public static final int body_text_3=0x7f070004;
-        public static final int body_text_disabled=0x7f070005;
-        public static final int comments_children_color=0x7f07000b;
-        public static final int hyperlink=0x7f070009;
+        public static final int actionbar_text_inverted=0x7f070001;
+        public static final int background_1=0x7f07000b;
+        public static final int block_column_2=0x7f07000d;
+        public static final int block_column_3=0x7f07000e;
+        public static final int body_text_1=0x7f070002;
+        public static final int body_text_1_inv=0x7f070003;
+        public static final int body_text_1_inverse=0x7f070007;
+        public static final int body_text_2=0x7f070004;
+        public static final int body_text_2_inverse=0x7f070008;
+        public static final int body_text_3=0x7f070005;
+        public static final int body_text_disabled=0x7f070006;
+        public static final int comments_children_color=0x7f07000c;
+        public static final int hyperlink=0x7f07000a;
     }
     public static final class dimen {
         public static final int actionbar_compat_height=0x7f080002;
@@ -222,13 +223,18 @@ containing a value of this type.
         public static final int ic_menu_more=0x7f020012;
         public static final int ic_menu_more_default=0x7f020013;
         public static final int ic_menu_more_holo=0x7f020014;
-        public static final int ic_menu_more_nu=0x7f020015;
-        public static final int ic_title_home=0x7f020016;
-        public static final int ic_title_refresh=0x7f020017;
-        public static final int ic_title_search=0x7f020018;
-        public static final int ic_title_share=0x7f020019;
-        public static final int icon=0x7f02001a;
-        public static final int vote=0x7f02001b;
+        public static final int ic_menu_more_inversed=0x7f020015;
+        public static final int ic_menu_more_nu=0x7f020016;
+        public static final int ic_title_home=0x7f020017;
+        public static final int ic_title_home_inversed=0x7f020018;
+        public static final int ic_title_refresh=0x7f020019;
+        public static final int ic_title_refresh_inversed=0x7f02001a;
+        public static final int ic_title_search=0x7f02001b;
+        public static final int ic_title_search_inversed=0x7f02001c;
+        public static final int ic_title_share=0x7f02001d;
+        public static final int ic_title_share_inversed=0x7f02001e;
+        public static final int icon=0x7f02001f;
+        public static final int vote=0x7f020020;
     }
     public static final class id {
         public static final int about_text=0x7f09000e;
@@ -238,59 +244,56 @@ containing a value of this type.
         public static final int actionbar_compat_text=0x7f090003;
         public static final int blocks_now=0x7f09000c;
         public static final int blocks_ruler=0x7f09000b;
-        public static final int buttonLogin=0x7f090030;
-        public static final int checkBoxRemember=0x7f09002e;
+        public static final int buttonLogin=0x7f09002d;
+        public static final int checkBoxRemember=0x7f09002b;
         public static final int colorstrip=0x7f090012;
-        public static final int comment_author=0x7f09001b;
-        public static final int comment_comment=0x7f09001d;
-        public static final int comment_whenposted=0x7f09001c;
+        public static final int comment_author=0x7f09001f;
+        public static final int comment_comment=0x7f090021;
+        public static final int comment_whenposted=0x7f090020;
         public static final int comments_header_layout=0x7f090014;
-        public static final int comments_inner_layout=0x7f09001a;
-        public static final int comments_layout=0x7f090019;
+        public static final int comments_inner_layout=0x7f09001e;
+        public static final int comments_layout=0x7f09001d;
         public static final int dialog_discard_confirm=0x7f090009;
         public static final int dialog_moderator=0x7f09000a;
-        public static final int editPassword=0x7f09002c;
-        public static final int editUsername=0x7f090029;
+        public static final int editPassword=0x7f090029;
+        public static final int editUsername=0x7f090026;
         public static final int fragment_session_detail=0x7f090005;
         public static final int fragment_sessions=0x7f090004;
         public static final int fragment_vendor_detail=0x7f090007;
         public static final int fragment_vendors=0x7f090006;
-        public static final int get_more_button=0x7f090032;
-        public static final int header_news=0x7f09001e;
+        public static final int get_more_button=0x7f09002f;
+        public static final int header_news=0x7f090022;
         public static final int layout_root=0x7f09000d;
-        public static final int layout_root_more_footer=0x7f090031;
-        public static final int loading_spinner=0x7f090033;
-        public static final int menu_more=0x7f09003b;
-        public static final int menu_refresh=0x7f09003a;
+        public static final int layout_root_more_footer=0x7f09002e;
+        public static final int loading_spinner=0x7f090030;
+        public static final int menu_more=0x7f090038;
+        public static final int menu_refresh=0x7f090037;
         public static final int menu_refresh_progress=0x7f090008;
-        public static final int news_author=0x7f090025;
-        public static final int news_comments=0x7f090024;
-        public static final int news_domain=0x7f090022;
-        public static final int news_hour=0x7f090021;
-        public static final int news_image=0x7f09001f;
-        public static final int news_points=0x7f090023;
-        public static final int news_title=0x7f090020;
-        public static final int no_data_retrieved=0x7f090018;
+        public static final int news_author=0x7f09001b;
+        public static final int news_comments=0x7f09001a;
+        public static final int news_domain=0x7f090018;
+        public static final int news_hour=0x7f090017;
+        public static final int news_image=0x7f090015;
+        public static final int news_points=0x7f090019;
+        public static final int news_title=0x7f090016;
+        public static final int no_data_retrieved=0x7f09001c;
         public static final int preview_nodata=0x7f090010;
         public static final int root_container=0x7f09000f;
         public static final int scrllvwNo1=0x7f090013;
         public static final int story_break=0x7f090011;
-        public static final int story_domain=0x7f090017;
-        public static final int story_hour=0x7f090016;
-        public static final int story_title=0x7f090015;
-        public static final int tableLayout1=0x7f090026;
-        public static final int tableRow1=0x7f090027;
-        public static final int tableRow2=0x7f09002a;
-        public static final int tableRow3=0x7f09002f;
-        public static final int tableRow4=0x7f09002d;
-        public static final int textView1=0x7f090028;
-        public static final int textView2=0x7f09002b;
-        public static final int webview=0x7f090034;
-        public static final int widget_author_comments=0x7f090039;
-        public static final int widget_hour=0x7f090037;
-        public static final int widget_points=0x7f090038;
-        public static final int widget_refresh=0x7f090035;
-        public static final int widget_title=0x7f090036;
+        public static final int tableLayout1=0x7f090023;
+        public static final int tableRow1=0x7f090024;
+        public static final int tableRow2=0x7f090027;
+        public static final int tableRow3=0x7f09002c;
+        public static final int tableRow4=0x7f09002a;
+        public static final int textView1=0x7f090025;
+        public static final int textView2=0x7f090028;
+        public static final int webview=0x7f090031;
+        public static final int widget_author_comments=0x7f090036;
+        public static final int widget_hour=0x7f090034;
+        public static final int widget_points=0x7f090035;
+        public static final int widget_refresh=0x7f090032;
+        public static final int widget_title=0x7f090033;
     }
     public static final class layout {
         public static final int about_dialog=0x7f030000;
@@ -337,40 +340,43 @@ containing a value of this type.
         public static final int warranty_info=0x7f0a0012;
     }
     public static final class style {
-        /**  
-    <style name="Theme.HNDroid.HomeInverted" parent="style/Theme.HNDroid">
-    	<item name="android:background">#000</item>
-    	
-    </style>
-    
+        public static final int ActionBarCompat=0x7f0c0005;
+        public static final int ActionBarCompatButton=0x7f0c0006;
+        public static final int ActionBarCompatButtonInverse=0x7f0c0007;
+        public static final int ActionBarCompatProgressIndicator=0x7f0c0008;
+        public static final int ActionBarCompatSeparator=0x7f0c0009;
+        public static final int ActionBarCompatSeparatorInverse=0x7f0c000a;
+        public static final int ActionBarCompatText=0x7f0c000b;
+        public static final int ActionBarCompatTextInverse=0x7f0c000c;
+        /**   
+        <item name="android:background">#FFFFFF</item>
+        <item name="menuItemTextColor">#008</item>
+        
          */
-        public static final int ActionBarCompat=0x7f0c0003;
-        public static final int ActionBarCompatButton=0x7f0c0004;
-        public static final int ActionBarCompatProgressIndicator=0x7f0c0005;
-        public static final int ActionBarCompatSeparator=0x7f0c0006;
-        public static final int ActionBarCompatText=0x7f0c0007;
-        public static final int DashboardButton=0x7f0c0008;
+        public static final int AlertDialogInverse=0x7f0c0002;
+        public static final int DashboardButton=0x7f0c000d;
         /**  used for more complex list items, e.g. those with stars aligned to the top-right 
          */
-        public static final int ListItemContainer=0x7f0c000d;
-        public static final int ListItemContainerBase=0x7f0c000b;
-        public static final int ListItemContent=0x7f0c000e;
-        public static final int ListItemSubtitle=0x7f0c000a;
-        public static final int ListItemTitle=0x7f0c0009;
-        public static final int PushButton=0x7f0c0017;
+        public static final int ListItemContainer=0x7f0c0012;
+        public static final int ListItemContainerBase=0x7f0c0010;
+        public static final int ListItemContent=0x7f0c0013;
+        public static final int ListItemSubtitle=0x7f0c000f;
+        public static final int ListItemTitle=0x7f0c000e;
+        public static final int PushButton=0x7f0c001d;
         /**  a simple list item is one whose container and content are the same view 
          */
-        public static final int SimpleListItem=0x7f0c000c;
-        public static final int TextBody=0x7f0c0016;
-        public static final int TextComment=0x7f0c0012;
-        public static final int TextHeader=0x7f0c0010;
-        public static final int TextHeader2=0x7f0c0014;
-        public static final int TextHeader3=0x7f0c0015;
-        public static final int TextHeaderSub=0x7f0c0011;
+        public static final int SimpleListItem=0x7f0c0011;
+        public static final int TextBody=0x7f0c001c;
+        public static final int TextComment=0x7f0c0018;
+        public static final int TextHeader=0x7f0c0015;
+        public static final int TextHeader2=0x7f0c001a;
+        public static final int TextHeader3=0x7f0c001b;
+        public static final int TextHeaderInverse=0x7f0c0016;
+        public static final int TextHeaderSub=0x7f0c0017;
         /**  body content 
          */
-        public static final int TextHeaderSubComments=0x7f0c000f;
-        public static final int TextHeaderSubTimeWhen=0x7f0c0013;
+        public static final int TextHeaderSubComments=0x7f0c0014;
+        public static final int TextHeaderSubTimeWhen=0x7f0c0019;
         /**  Base application theme is the default theme. 
          */
         public static final int Theme=0x7f0c0000;
@@ -383,7 +389,8 @@ containing a value of this type.
     		 <item name="android:windowBackground">@drawable/background_noise</item>
     	 
          */
-        public static final int Theme_HNDroid_Home=0x7f0c0002;
+        public static final int Theme_HNDroid_Home=0x7f0c0003;
+        public static final int Theme_HNDroid_HomeInverse=0x7f0c0004;
     }
     public static final class xml {
         public static final int preferences=0x7f050000;

@@ -174,7 +174,6 @@
     
     <style name="TextHeaderInverse">
         <item name="android:textSize">@dimen/text_size_xlarge</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/body_text_1_inverse</item>
         <item name="android:maxLines">?attr/textHeaderMaxLines</item>
         <item name="android:ellipsize">end</item>
@@ -195,10 +194,23 @@
 
     </style>
     
+    <style name="TextCommentInverse">
+    	<item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/body_text_1_inverse</item>
+    </style>
+    
     <style name="TextHeaderSubTimeWhen">
         <item name="android:textSize">@dimen/text_size_small</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/body_text_3</item>
+
+    </style>
+    
+    <style name="TextHeaderSubTimeWhenInverse">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/body_text_3_inverse</item>
 
     </style>
 
@@ -223,9 +235,10 @@
 
     </style>
 
-    <style name="PushButton">
+    <style name="DomainTextInverse">
         <item name="android:textSize">@dimen/text_size_small</item>
-        <item name="android:background">@drawable/btn</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/domain_color_inverse</item>
     </style>
 
 

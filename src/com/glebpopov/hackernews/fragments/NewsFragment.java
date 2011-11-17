@@ -613,6 +613,7 @@ public class NewsFragment extends ListFragment
 	                    	if (isNiteMode)
 	                    	{
 	                    		domainView.setBackgroundColor(Color.TRANSPARENT);
+	                    		domainView.setTextAppearance(mActivity, R.style.DomainTextInverse);
 	                    	}
 	                    }
 	                    
@@ -621,7 +622,7 @@ public class NewsFragment extends ListFragment
 	                    	titleView.setText(o.getTitle());     
 	                    	if (isNiteMode)
 	                    	{
-	                    		titleView.setTextColor(Color.WHITE);
+	                    		titleView.setTextAppearance(mActivity, R.style.TextHeaderInverse);
 	                    	}
 	                    }
 	                    

@@ -162,13 +162,14 @@ containing a value of this type.
         public static final int block_column_2=0x7f07000d;
         public static final int block_column_3=0x7f07000e;
         public static final int body_text_1=0x7f070002;
-        public static final int body_text_1_inv=0x7f070003;
-        public static final int body_text_1_inverse=0x7f070007;
-        public static final int body_text_2=0x7f070004;
-        public static final int body_text_2_inverse=0x7f070008;
-        public static final int body_text_3=0x7f070005;
-        public static final int body_text_disabled=0x7f070006;
+        public static final int body_text_1_inverse=0x7f070006;
+        public static final int body_text_2=0x7f070003;
+        public static final int body_text_2_inverse=0x7f070007;
+        public static final int body_text_3=0x7f070004;
+        public static final int body_text_3_inverse=0x7f070008;
+        public static final int body_text_disabled=0x7f070005;
         public static final int comments_children_color=0x7f07000c;
+        public static final int domain_color_inverse=0x7f07000f;
         public static final int hyperlink=0x7f07000a;
     }
     public static final class dimen {
@@ -355,6 +356,7 @@ containing a value of this type.
          */
         public static final int AlertDialogInverse=0x7f0c0002;
         public static final int DashboardButton=0x7f0c000d;
+        public static final int DomainTextInverse=0x7f0c001f;
         /**  used for more complex list items, e.g. those with stars aligned to the top-right 
          */
         public static final int ListItemContainer=0x7f0c0012;
@@ -362,21 +364,22 @@ containing a value of this type.
         public static final int ListItemContent=0x7f0c0013;
         public static final int ListItemSubtitle=0x7f0c000f;
         public static final int ListItemTitle=0x7f0c000e;
-        public static final int PushButton=0x7f0c001d;
         /**  a simple list item is one whose container and content are the same view 
          */
         public static final int SimpleListItem=0x7f0c0011;
-        public static final int TextBody=0x7f0c001c;
+        public static final int TextBody=0x7f0c001e;
         public static final int TextComment=0x7f0c0018;
+        public static final int TextCommentInverse=0x7f0c0019;
         public static final int TextHeader=0x7f0c0015;
-        public static final int TextHeader2=0x7f0c001a;
-        public static final int TextHeader3=0x7f0c001b;
+        public static final int TextHeader2=0x7f0c001c;
+        public static final int TextHeader3=0x7f0c001d;
         public static final int TextHeaderInverse=0x7f0c0016;
         public static final int TextHeaderSub=0x7f0c0017;
         /**  body content 
          */
         public static final int TextHeaderSubComments=0x7f0c0014;
-        public static final int TextHeaderSubTimeWhen=0x7f0c0019;
+        public static final int TextHeaderSubTimeWhen=0x7f0c001a;
+        public static final int TextHeaderSubTimeWhenInverse=0x7f0c001b;
         /**  Base application theme is the default theme. 
          */
         public static final int Theme=0x7f0c0000;

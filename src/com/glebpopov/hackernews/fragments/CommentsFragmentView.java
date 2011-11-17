@@ -113,6 +113,7 @@ public class CommentsFragmentView extends Fragment
                 	if (isNiteMode)
                 	{
                 		domainView.setBackgroundColor(Color.TRANSPARENT);
+                		domainView.setTextAppearance(mActivity, R.style.DomainTextInverse);
                 	}
                 }
                 
@@ -127,7 +128,7 @@ public class CommentsFragmentView extends Fragment
         	        });
                 	if (isNiteMode)
                 	{
-                		titleView.setTextColor(Color.WHITE);
+                		titleView.setTextAppearance(mActivity, R.style.TextHeaderInverse);
                 	}
                 }
                 
@@ -366,23 +367,24 @@ public class CommentsFragmentView extends Fragment
                 	int color = -1;
                 	if (isNiteMode)
                 	{
+                		commentViewChild.setBackgroundColor(Color.BLACK);
                 		if (parent.getColor() == Color.BLACK)
                 		{
-                			color = Color.WHITE;
-                			commentViewChild.setTextColor(Color.BLACK);
+                			commentViewChild.setTextAppearance(mActivity, R.style.TextCommentInverse);
+                			childItem.setColor(Color.WHITE);
                 		} else
                 		{
-                			color = Color.BLACK;
                 			commentViewChild.setTextColor(Color.WHITE);
+                			childItem.setColor(Color.BLACK);
                 		}
                 	} else
             		{
                 		color = (parent.getColor() == Color.WHITE) ?
                 				Color.LTGRAY : 
                 				Color.WHITE;
+                		commentViewChild.setBackgroundColor(color);
+                    	childItem.setColor(color);
             		}
-                	commentViewChild.setBackgroundColor(color);
-                	childItem.setColor(color);
                 	Linkify.addLinks(commentViewChild, Linkify.ALL);
                 }
                 if (hourViewChild != null) 

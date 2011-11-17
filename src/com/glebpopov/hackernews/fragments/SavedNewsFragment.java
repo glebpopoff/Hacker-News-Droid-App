@@ -539,6 +539,7 @@ public class SavedNewsFragment extends ListFragment
 	                    	if (isNiteMode)
 	                    	{
 	                    		domainView.setBackgroundColor(Color.TRANSPARENT);
+	                    		domainView.setTextAppearance(mActivity, R.style.DomainTextInverse);
 	                    	}
 	                    }
 	                    
@@ -547,7 +548,7 @@ public class SavedNewsFragment extends ListFragment
 	                    	titleView.setText(o.getTitle());  
 	                    	if (isNiteMode)
 	                    	{
-	                    		titleView.setTextColor(Color.WHITE);
+	                    		titleView.setTextAppearance(mActivity, R.style.TextHeaderInverse);
 	                    	}
 	                    }
 	                    

@@ -3,13 +3,13 @@
     <color name="actionbar_text_inverted">#ffffff</color>
 
     <color name="body_text_1">#ff000000</color>
-    <color name="body_text_1_inv">#fff</color>
     <color name="body_text_2">#99000000</color>
     <color name="body_text_3">#FF660000</color>
     <color name="body_text_disabled">#66000000</color>
 
-    <color name="body_text_1_inverse">#ffffff</color>
+    <color name="body_text_1_inverse">#ff336600</color>
     <color name="body_text_2_inverse">#99ffffff</color>
+	<color name="body_text_3_inverse">#ff003366</color>
 
     <color name="accent_1">#ff29549f</color>
     <color name="hyperlink">#ffff549f</color>
@@ -18,4 +18,5 @@
     <color name="comments_children_color">#E6E0E0FF</color>
     <color name="block_column_2">#ffdf1831</color>
     <color name="block_column_3">#ff009939</color>
+    <color name="domain_color_inverse">#ff003366</color>
 </resources>

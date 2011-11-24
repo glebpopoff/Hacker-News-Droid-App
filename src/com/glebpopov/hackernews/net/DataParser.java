@@ -16,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.glebpopov.hackernews.domain.CommentItem;
+import com.glebpopov.hackernews.domain.NewsContainer;
 import com.glebpopov.hackernews.domain.NewsItem;
 
 import android.util.Log;
@@ -35,7 +36,7 @@ public class DataParser
 		return dataUrl;
 	}
 	
-	public ArrayList<NewsItem> getNews()
+	public NewsContainer getNews()
 	{
 		if (dataUrl == null || dataUrl.length() == 0)
 		{
@@ -44,23 +45,26 @@ public class DataParser
 		}
 		Log.d(TAG, "URL: " + dataUrl);
 		
-		ArrayList<NewsItem> data = new ArrayList<NewsItem>();
+		NewsContainer container = null;
 		JSONArray jsonData = getJsonData();
 		if (jsonData != null)
 		{
-			
+			container = new NewsContainer();
+			ArrayList<NewsItem> data = new ArrayList<NewsItem>();
 			NewsItem item = null;
+			NewsItem moreLink = null;
+			//shouldn't return links to NEXT...links to next should be appended somewhere else
 			for (int i=0; i<jsonData.length(); i++)
 			{
-				item = new NewsItem();
 				try
 				{
 					if (jsonData.getJSONObject(i).getString("title") != null &&
 						jsonData.getJSONObject(i).getString("title").toLowerCase().equals("nextid")
 						)
 					{
-						item.setTitle(jsonData.getJSONObject(i).getString("title"));
-						item.setUrl("http://hndroidapi.appspot.com" + jsonData.getJSONObject(i).getString("url"));
+						moreLink = new NewsItem();
+						moreLink.setTitle(jsonData.getJSONObject(i).getString("title"));
+						moreLink.setUrl("http://hndroidapi.appspot.com" + jsonData.getJSONObject(i).getString("url"));
 						
 					} else
 					{
@@ -70,6 +74,7 @@ public class DataParser
 							id = Integer.parseInt(jsonData.getJSONObject(i).getString("item_id"));
 						} catch (Exception ex) {}
 						
+						item = new NewsItem();
 						item.setTitle(jsonData.getJSONObject(i).getString("title"));
 						item.setUrl(jsonData.getJSONObject(i).getString("url"));
 						item.setPostedDate(jsonData.getJSONObject(i).getString("time"));
@@ -77,19 +82,28 @@ public class DataParser
 						item.setAuthor(jsonData.getJSONObject(i).getString("user"));
 						item.setComments(jsonData.getJSONObject(i).getString("comments"));
 						item.setId(id);
+						
+						//add to container
+						data.add(item);
 					}
 				} catch (Exception ex)
 				{
 					Log.e(TAG, "getNews: exception while parsing JSON data: " + ex);
 				}
-				data.add(item);
 			}
 			
+			container.setNewsContainer(data);
+			container.setMoreNewsLink(moreLink);
 		}
         
-        Log.d(TAG, "getNews: returning " + data.size() + " elements");
-        
-		return data;
+		if (container != null && container.getNewsContainer() != null)
+		{
+			Log.d(TAG, "getNews: returning " + container.getNewsContainer().size() + " elements");
+		} else
+		{
+			Log.w(TAG, "getNews: failed to retrieve news data");
+		}
+		return container;
 	}
 	
 	public ArrayList<CommentItem> getComments()
@@ -258,15 +272,17 @@ public class DataParser
 
 	public NewsItem getLatestNews() {
 		Log.d(TAG, "getLatestNews");
-		ArrayList<NewsItem> data = getNews();
-		if (data != null && data.size() > 0 && data.get(0) != null && data.get(0).getTitle() != null)
+		NewsContainer container = getNews();
+		if (container != null)
 		{
-			Log.d(TAG, "getLatestNews: successfully retrieved " + data.size() + " records");
-			return data.get(0);
-		} else
-		{
-			Log.w(TAG, "getLatestNews: no data returned");
-			return null;
+			ArrayList<NewsItem> data = container.getNewsContainer();
+			if (data != null && data.size() > 0 && data.get(0) != null && data.get(0).getTitle() != null)
+			{
+				Log.d(TAG, "getLatestNews: successfully retrieved " + data.size() + " records");
+				return data.get(0);
+			} 
 		}
+		Log.w(TAG, "getLatestNews: no data returned");
+		return null;
 	}
 }

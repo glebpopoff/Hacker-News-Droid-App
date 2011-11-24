@@ -10,6 +10,7 @@ import com.glebpopov.hackernews.AskActivity;
 import com.glebpopov.hackernews.BestActivity;
 import com.glebpopov.hackernews.NewestActivity;
 import com.glebpopov.hackernews.R;
+import com.glebpopov.hackernews.domain.NewsContainer;
 import com.glebpopov.hackernews.domain.NewsItem;
 import com.glebpopov.hackernews.net.DataParser;
 import com.glebpopov.hackernews.net.InstapaperIntegration;
@@ -70,6 +71,7 @@ public class NewsFragment extends ListFragment
 	private int instapaperReturnCode = -1;
 	protected SharedPreferences sharedPref = null;
 	protected boolean isNiteMode = false;
+	protected NewsItem moreLink = null;
 	
 	private View.OnClickListener loadMoreListener = new View.OnClickListener() {
         public void onClick(View view) {
@@ -100,15 +102,22 @@ public class NewsFragment extends ListFragment
 	{
 		Log.d(TAG, "getNewsItems: getting data: " + url);
 		final DataParser d = new DataParser(url);
-        data = d.getNews();
+        NewsContainer container = d.getNews();
+        if (container != null)
+		{
+        	data = container.getNewsContainer();
+        	moreLink = container.getMoreNewsLink();
+		}
         
         //try again (in case of a network glitch?)
-		if (!(data != null && 
+		if (!(container != null && 
+				data != null && 
         		data.size() > 0 && 
         		data.get(0) != null && 
         		data.get(0).getId() > 0))
         {
-			data = d.getNews();
+			data = container.getNewsContainer();
+        	moreLink = container.getMoreNewsLink();
         }
         
 		//check data container
@@ -127,6 +136,12 @@ public class NewsFragment extends ListFragment
             		setEmptyText("Unable to retrieve data. Please try again.");
             	}
             	
+            	//set more link
+            	if (moreLink != null && !moreLink.getUrl().equals(""))
+            	{
+            		nextDataUrl = moreLink.getUrl();
+            	}
+            	
             	mAdapter = new NewsItemAdapter(mActivity, R.id.header_news, data);
             	setListAdapter(mAdapter);
             	registerForContextMenu(getListView());
@@ -134,6 +149,7 @@ public class NewsFragment extends ListFragment
             	{
             		m_ProgressDialog.hide();
             	}
+            	getListView().setFastScrollEnabled(true);
             } });
 	}
 		
@@ -591,6 +607,8 @@ public class NewsFragment extends ListFragment
 	            if (o != null && 
 	            	o.getTitle() != null) 
 	            {
+	            	Log.d(TAG, "Displaying: " + o.getTitle());
+	            	
 	                TextView titleView = (TextView) v.findViewById(R.id.news_title);
 	                TextView hourView = (TextView) v.findViewById(R.id.news_hour);
 	                TextView authorView = (TextView) v.findViewById(R.id.news_author);
@@ -662,13 +680,7 @@ public class NewsFragment extends ListFragment
 	                    	}
 	                    }
 	                }
-	                
-	                //last element
-	                if (isMoreLink(o.getTitle(), o.getUrl()))
-	                {	
-	                	nextDataUrl = o.getUrl();
-	             
-	                }            
+	                       
 	            }
 	            counter++;
 	            return v;

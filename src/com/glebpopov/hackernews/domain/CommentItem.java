@@ -79,30 +79,44 @@ public class CommentItem
     	childrenContainer = container;
     }
     
+    /**
+     * Returns actual comment text
+     * The API doesn't return clean text (blame python, my dev skills, appengine, etc)
+     * as a result we need do lots of searching & replacing to clean that up
+     * We also need to replace poorman's break characters with \n
+     */
     public String getComment() {
         if (comment != null)
         {
-        	//Log.d(TAG, "Comment:\n" + comment);
-        	
         	if (comment.contains("__BR__"))
         	{
         		comment = comment.replaceAll("__BR__", "\n\n");
         	}
         	
-        	try {
+			try
+			{
+				comment = StringEscapeUtils.unescapeHtml(comment);
+			} catch (Exception e) 
+			{
+				Log.w(TAG, "Exception(s) unescapeHtml in comment: " + e);
+			}
+			
+			try {
+				comment = comment.replace("\\", "");
+				comment = comment.replace("&#62;", ">");
+				comment = comment.replace("&#38;", "&");
+				comment = comment.replace("&#60;", "<");
+				comment = comment.replace("&euro;&trade;", "'");
+			} catch (Exception e) 
+			{
+				Log.w(TAG, "Exception(s) replacing char in comment: " + e);
+			}
+
+			try {
 				comment = URLDecoder.decode(comment, "UTF-8");
 			} catch (Exception e) 
 			{
 				Log.w(TAG, "Exception(s) decoding comment: " + e);
-			}
-			try {
-				comment = comment.replace("\\", "");
-				comment = StringEscapeUtils.unescapeHtml(comment);
-				comment = comment.replace("&#62;", ">");
-				comment = comment.replace("&#60;", "<");
-			} catch (Exception e) 
-			{
-				Log.w(TAG, "Exception(s) replacing char in comment: " + e);
 			}
         }
         return comment;

@@ -13,6 +13,14 @@
         android:layout_height="fill_parent"
         android:fadingEdge="vertical"
          />
+     
+     <TextView android:id="@+id/preview_loading"
+		android:text="Loading...."
+		android:indeterminate="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+      	style="@style/TextHeaderInverse" />
          
      <TextView android:id="@+id/preview_nodata"
 		android:text="Unable to retrieve data. Please try again or read original."

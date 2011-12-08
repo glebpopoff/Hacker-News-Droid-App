@@ -6,6 +6,7 @@ import com.glebpopov.hackernews.PreviewActivity;
 import com.glebpopov.hackernews.BestActivity;
 import com.glebpopov.hackernews.NewestActivity;
 import com.glebpopov.hackernews.CommentsActivity;
+import com.glebpopov.hackernews.SavedActivity;
 import com.glebpopov.hackernews.R;
 
 import android.app.Activity;
@@ -104,7 +105,33 @@ public class ActivityHelper {
                 return true;
             case R.id.menu_more:
             	Log.d(TAG, "More Menu Item Clicked");
-            	((MainActivity)mActivity).displayMainNavMenu();
+            	if (mActivity instanceof MainActivity) 
+            	{
+            		((MainActivity)mActivity).displayMainNavMenu();
+            		
+                } else if (mActivity instanceof CommentsActivity) 
+            	{
+            		((CommentsActivity)mActivity).displayMainNavMenu();
+            		
+                } else if (mActivity instanceof AskActivity) 
+            	{
+            		((AskActivity)mActivity).displayMainNavMenu();
+            		
+                } else if (mActivity instanceof NewestActivity) 
+            	{
+            		((NewestActivity)mActivity).displayMainNavMenu();
+            		
+                } else if (mActivity instanceof BestActivity) 
+            	{
+            		((BestActivity)mActivity).displayMainNavMenu();
+            		
+                } else if (mActivity instanceof PreviewActivity) 
+            	{
+            		((PreviewActivity)mActivity).displayMainNavMenu();
+                } else if (mActivity instanceof SavedActivity) 
+            	{
+            		((SavedActivity)mActivity).displayMainNavMenu();
+                }
             	return true;
         }
         return false;

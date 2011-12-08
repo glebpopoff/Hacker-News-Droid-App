@@ -5,4 +5,11 @@
         android:title="@string/description_refresh"
         android:orderInCategory="1"
         />
+        
+    <item android:id="@+id/menu_more"
+          android:title="@string/menu_more"
+          android:icon="@drawable/ic_menu_more"
+          android:orderInCategory="2"
+          
+           />
 </menu>

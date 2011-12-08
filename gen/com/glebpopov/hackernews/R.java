@@ -267,8 +267,8 @@ containing a value of this type.
         public static final int layout_root=0x7f09000d;
         public static final int layout_root_more_footer=0x7f09002e;
         public static final int loading_spinner=0x7f090030;
-        public static final int menu_more=0x7f090038;
-        public static final int menu_refresh=0x7f090037;
+        public static final int menu_more=0x7f090039;
+        public static final int menu_refresh=0x7f090038;
         public static final int menu_refresh_progress=0x7f090008;
         public static final int news_author=0x7f09001b;
         public static final int news_comments=0x7f09001a;
@@ -278,6 +278,7 @@ containing a value of this type.
         public static final int news_points=0x7f090019;
         public static final int news_title=0x7f090016;
         public static final int no_data_retrieved=0x7f09001c;
+        public static final int preview_loading=0x7f090032;
         public static final int preview_nodata=0x7f090010;
         public static final int root_container=0x7f09000f;
         public static final int scrllvwNo1=0x7f090013;
@@ -290,11 +291,11 @@ containing a value of this type.
         public static final int textView1=0x7f090025;
         public static final int textView2=0x7f090028;
         public static final int webview=0x7f090031;
-        public static final int widget_author_comments=0x7f090036;
-        public static final int widget_hour=0x7f090034;
-        public static final int widget_points=0x7f090035;
-        public static final int widget_refresh=0x7f090032;
-        public static final int widget_title=0x7f090033;
+        public static final int widget_author_comments=0x7f090037;
+        public static final int widget_hour=0x7f090035;
+        public static final int widget_points=0x7f090036;
+        public static final int widget_refresh=0x7f090033;
+        public static final int widget_title=0x7f090034;
     }
     public static final class layout {
         public static final int about_dialog=0x7f030000;

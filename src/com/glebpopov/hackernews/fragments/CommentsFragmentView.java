@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.util.Linkify;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -399,7 +400,10 @@ public class CommentsFragmentView extends Fragment
                 ll.addView(childView);
                 
                 LinearLayout cll = (LinearLayout) childView.findViewById(R.id.comments_layout);
-                cll.setPadding(45, 0, 0, 0);
+                DisplayMetrics displaymetrics = new DisplayMetrics();
+                getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+                Log.d(TAG, "Screen Width: " + displaymetrics.widthPixels);
+                cll.setPadding(30, 0, 0, 0);
             	if (cll != null && childItem.getChildren() != null && childItem.getChildren().size() > 0)
             	{
             		addChildItems(childItem, cll);

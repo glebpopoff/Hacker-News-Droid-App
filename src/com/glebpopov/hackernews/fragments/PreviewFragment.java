@@ -23,6 +23,7 @@ public class PreviewFragment extends Fragment
 	private String resourceUrl = null;
 	private WebView mWebView;
 	protected boolean isNiteMode = false;
+	protected TextView mLoadingView = null;
     private View mLoadingSpinner;
     protected SharedPreferences sharedPref = null;
 	
@@ -73,6 +74,7 @@ public class PreviewFragment extends Fragment
             }
 	        
 	        mLoadingSpinner = root.findViewById(R.id.loading_spinner);
+	        mLoadingView = (TextView) root.findViewById(R.id.preview_loading);
 	        mWebView.setWebViewClient(mWebViewClient);
 	
 	        mWebView.post(new Runnable() {
@@ -88,6 +90,7 @@ public class PreviewFragment extends Fragment
 	                    	mWebView.setBackgroundColor(0);
 	        	        	mWebView.invalidate(); 
 	                    }
+	                    
 	                    
 	                } catch (Exception e) {
 	                    Log.e(TAG, "Could not construct the URL", e);
@@ -131,6 +134,7 @@ public class PreviewFragment extends Fragment
             		"})()");  
             }
             mLoadingSpinner.setVisibility(View.GONE);
+            mLoadingView.setVisibility(View.GONE);
             mWebView.setVisibility(View.VISIBLE);
         }
 

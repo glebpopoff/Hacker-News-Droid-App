@@ -95,6 +95,10 @@ public class NewsFragment extends ListFragment
 	{
 		Log.d(TAG, "New Instance");
 		mActivity = m;
+		if (mActivity == null)
+        {
+        	mActivity = getActivity();
+        }
 		dataUrlResource = urlRes;
 	}
 	
@@ -116,9 +120,14 @@ public class NewsFragment extends ListFragment
         		data.get(0) != null && 
         		data.get(0).getId() > 0))
         {
-			data = container.getNewsContainer();
-        	moreLink = container.getMoreNewsLink();
+			container = d.getNews();			
         }
+		
+		if (container != null)
+		{
+        	data = container.getNewsContainer();
+        	moreLink = container.getMoreNewsLink();
+		}
         
 		//check data container
         mActivity.runOnUiThread(new Runnable() {
@@ -141,15 +150,35 @@ public class NewsFragment extends ListFragment
             	{
             		nextDataUrl = moreLink.getUrl();
             	}
-            	
-            	mAdapter = new NewsItemAdapter(mActivity, R.id.header_news, data);
-            	setListAdapter(mAdapter);
-            	registerForContextMenu(getListView());
-            	if (m_ProgressDialog != null)
+            	ListView v = null;
+            	try
             	{
-            		m_ProgressDialog.hide();
+            		v = getListView();
+            	} catch (Exception ex)
+            	{
+            		Log.e(TAG, "Error(s) getting ListView: " + ex);
             	}
-            	getListView().setFastScrollEnabled(true);
+            	if (v == null)
+            	{
+            		if (m_ProgressDialog != null)
+                	{
+                		m_ProgressDialog.hide();
+                	}
+            		
+            		Toast.makeText(mActivity, "Unable to refresh data. Please try again.", 50000).show();
+            		
+            	} else
+            	{
+            		mAdapter = new NewsItemAdapter(mActivity, R.id.header_news, data);
+                	setListAdapter(mAdapter);
+                	registerForContextMenu(v);
+                	if (m_ProgressDialog != null)
+                	{
+                		m_ProgressDialog.hide();
+                	}
+                	v.setFastScrollEnabled(true);
+            	} 
+            	
             } });
 	}
 		

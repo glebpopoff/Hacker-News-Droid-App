@@ -20,6 +20,12 @@
 			android:title="Clear Saved Content"  
 			android:summary="Click here to clear saved content"
 			android:defaultValue="true" />
+		
+		<com.glebpopov.hackernews.settings.ClearReadItLaterLogin  
+			android:key="clear_read_it_later_content"
+			android:title="Clear Read It Later Login"  
+			android:summary="Click here to clear Read It Later authentication tokens"
+			android:defaultValue="true" />
 			
 		<com.glebpopov.hackernews.settings.ClearInstapaperLogin
 			android:key="clear_instapaper_content"

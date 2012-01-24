@@ -310,7 +310,8 @@ containing a value of this type.
         public static final int login_dialog=0x7f030009;
         public static final int news_footer_view=0x7f03000a;
         public static final int preview_dialog=0x7f03000b;
-        public static final int widgetlayout=0x7f03000c;
+        public static final int read_it_later_login_dialog=0x7f03000c;
+        public static final int widgetlayout=0x7f03000d;
     }
     public static final class menu {
         public static final int default_menu_items=0x7f0d0000;
@@ -321,25 +322,26 @@ containing a value of this type.
         public static final int sql=0x7f060000;
     }
     public static final class string {
-        public static final int about_app=0x7f0a0011;
-        public static final int app_name=0x7f0a0008;
-        public static final int description_home=0x7f0a0006;
-        public static final int description_refresh=0x7f0a0007;
-        public static final int hn_comments_url=0x7f0a0010;
-        public static final int hn_url=0x7f0a0009;
-        public static final int hn_url_ask=0x7f0a000d;
-        public static final int hn_url_best=0x7f0a000f;
-        public static final int hn_url_latest=0x7f0a000b;
-        public static final int hn_url_newest=0x7f0a000e;
-        public static final int hn_url_news=0x7f0a000c;
-        public static final int hn_url_reply=0x7f0a000a;
-        public static final int menu_about=0x7f0a0001;
-        public static final int menu_ask_hn=0x7f0a0003;
-        public static final int menu_best=0x7f0a0004;
-        public static final int menu_home=0x7f0a0000;
-        public static final int menu_more=0x7f0a0002;
-        public static final int menu_newest=0x7f0a0005;
-        public static final int warranty_info=0x7f0a0012;
+        public static final int about_app=0x7f0a0012;
+        public static final int app_name=0x7f0a0009;
+        public static final int description_home=0x7f0a0007;
+        public static final int description_refresh=0x7f0a0008;
+        public static final int hn_comments_url=0x7f0a0011;
+        public static final int hn_url=0x7f0a000a;
+        public static final int hn_url_ask=0x7f0a000e;
+        public static final int hn_url_best=0x7f0a0010;
+        public static final int hn_url_latest=0x7f0a000c;
+        public static final int hn_url_newest=0x7f0a000f;
+        public static final int hn_url_news=0x7f0a000d;
+        public static final int hn_url_reply=0x7f0a000b;
+        public static final int menu_about=0x7f0a0002;
+        public static final int menu_ask_hn=0x7f0a0004;
+        public static final int menu_best=0x7f0a0005;
+        public static final int menu_home=0x7f0a0001;
+        public static final int menu_more=0x7f0a0003;
+        public static final int menu_newest=0x7f0a0006;
+        public static final int readitlater_api_key=0x7f0a0000;
+        public static final int warranty_info=0x7f0a0013;
     }
     public static final class style {
         public static final int ActionBarCompat=0x7f0c0005;

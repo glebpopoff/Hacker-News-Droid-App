@@ -1,7 +1,9 @@
 package com.glebpopov.hackernews.fragments;
 
 import java.net.URLEncoder;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.glebpopov.hackernews.CommentsActivity;
 import com.glebpopov.hackernews.MainActivity;
@@ -14,6 +16,7 @@ import com.glebpopov.hackernews.domain.NewsContainer;
 import com.glebpopov.hackernews.domain.NewsItem;
 import com.glebpopov.hackernews.net.DataParser;
 import com.glebpopov.hackernews.net.InstapaperIntegration;
+import com.glebpopov.hackernews.net.ReadItLaterIntegration;
 import com.glebpopov.hackernews.util.AppSettings;
 import com.glebpopov.hackernews.util.DatabaseUtil;
 import com.glebpopov.hackernews.util.ImageLoader;
@@ -64,11 +67,14 @@ public class NewsFragment extends ListFragment
 	private int dataUrlResource;
 	private String nextDataUrl = null;
 	private TextView mEditUsername, mEditPassword;
+	private Button mReadItLaterButton;
 	private Button mInstapaperButton;
+	private Dialog mReadItLaterDialog;
 	private Dialog mInstapaperDialog;
 	private CheckBox mRememberLogin;
 	private AppSettings appSettings = null;
 	private int instapaperReturnCode = -1;
+	private int readItLaterReturnCode = -1;
 	protected SharedPreferences sharedPref = null;
 	protected boolean isNiteMode = false;
 	protected NewsItem moreLink = null;
@@ -325,6 +331,80 @@ public class NewsFragment extends ListFragment
 		return instapaperReturnCode;
 	}
 	
+	private int saveToReadItLater(CharSequence username, CharSequence password, String articleUrl, String title)
+	{
+		try
+		{
+			String url = "https://readitlaterlist.com/v2/add?apikey=" + mActivity.getResources().getString(R.string.readitlater_api_key) + "&username=" + URLEncoder.encode(username.toString()) + "&password=" + URLEncoder.encode(password.toString()) + "&url=" + URLEncoder.encode(articleUrl) + "&title=" + URLEncoder.encode(title);
+			Log.d(TAG, "ReadItLater URL: " + url);
+			ReadItLaterIntegration readItLaterNet = new ReadItLaterIntegration(url);
+			readItLaterReturnCode = readItLaterNet.submitData();
+			Log.d(TAG, "ReadItLater Return code: " + readItLaterReturnCode);
+			
+			 mActivity.runOnUiThread(new Runnable() {
+		            public void run() 
+		            {
+		            	
+		            	if (readItLaterReturnCode == 200)
+	            		{
+	            			Toast.makeText(mActivity, "Saved successfully", 50000).show();
+	            			if (mReadItLaterDialog != null)
+	            			{
+	            				mReadItLaterDialog.cancel();
+	            			}
+	            		} else if (readItLaterReturnCode == 400)
+	            		{
+	            			Toast.makeText(mActivity, "Unable to save: Bad request.", 50000).show();
+	            			if (mReadItLaterDialog != null)
+	            			{
+	            				mReadItLaterDialog.cancel();
+	            			}
+	            		} else if (readItLaterReturnCode == 401)
+	            		{
+	            			Toast.makeText(mActivity, "Unable to save: Invalid username or password. Please try again.", 50000).show();
+	            			
+	            		} else if (readItLaterReturnCode == 403)
+	            		{
+	            			Toast.makeText(mActivity, "Unable to save: Rate limit exceeded, please wait a little bit before resubmitting.", 50000).show();
+	            			if (mReadItLaterDialog != null)
+	            			{
+	            				mReadItLaterDialog.cancel();
+	            			}
+	            			
+	            		} else if (readItLaterReturnCode == 503)
+	            		{
+	            			Toast.makeText(mActivity, "Unable to save: The service encountered an error. Please try again later.", 50000).show();
+	            			if (mReadItLaterDialog != null)
+	            			{
+	            				mReadItLaterDialog.cancel();
+	            			}
+	            		} 
+		            	
+		            	if (m_ProgressDialog != null)
+		            	{
+		            		m_ProgressDialog.hide();
+		            	}
+		            } });
+			
+			
+		} catch (Exception ex)
+		{
+			Log.e(TAG, "Exception while saving to ReadItLater: " + ex);
+			mActivity.runOnUiThread(new Runnable() {
+	            public void run() 
+	            {
+	            	Toast.makeText(mActivity, "Unable to save: application error.", 50000).show();
+	            	
+	            	if (m_ProgressDialog != null)
+	            	{
+	            		m_ProgressDialog.hide();
+	            	}
+	            }
+	            });
+		}
+		return readItLaterReturnCode;
+	}
+	
 	@Override
 	public boolean onContextItemSelected(MenuItem item) 
 	{
@@ -419,6 +499,7 @@ public class NewsFragment extends ListFragment
                 								  newsItem.getTitle()
                 									);
                 		
+                		//invalid username/password
 	                	if (code == 403)
 	            		{
 	            			showDialog = true;
@@ -491,6 +572,113 @@ public class NewsFragment extends ListFragment
 	            Thread thread =  new Thread(null, instapaperRunner, "HackerNewsInstaPaperBackground");
 	            thread.start(); 
 		            
+			} else if (menuItemName.equals("Save to Read it Later"))
+			{
+				Runnable readItLaterRunner = new Runnable(){
+		            @Override
+		            public void run() {
+		            	
+		            
+				try
+				{
+					boolean showDialog = true;
+					if (appSettings == null)
+	        		{
+	        			appSettings = new AppSettings(getActivity());
+	        		}
+					
+					//saved login
+					String savedUsername = appSettings.getReadItLaterUsername();
+					String savedPassword = appSettings.getReadItLaterPassword();
+					
+					//ok, if we already saved credentials then don't display the dialog
+					if (savedUsername != null && 
+						savedUsername.length() > 0 &&
+						savedPassword != null && 
+						savedPassword.length() > 0
+						)
+					{
+						showDialog = false;
+						//submit to instapaper
+                		int code = saveToReadItLater(savedUsername,
+                								savedPassword,
+                								  newsItem.getUrl(),
+                								  newsItem.getTitle()
+                									);
+                		
+                		//invalid username/password
+	                	if (code == 401)
+	            		{
+	            			showDialog = true;
+	            		}
+					}
+					
+					if (showDialog)
+					{
+						mActivity.runOnUiThread(new Runnable() {
+				            public void run() 
+				            {
+				            	
+				            	if (m_ProgressDialog != null)
+				            	{
+				            		m_ProgressDialog.hide();
+				            	}
+				            	
+						mReadItLaterDialog = new Dialog(getActivity());
+						mReadItLaterDialog.setContentView(R.layout.login_dialog);
+						mReadItLaterDialog.setTitle("Save to Read It Later");
+						mReadItLaterDialog.setCancelable(true);
+		                //there are a lot of settings, for dialog, check them all out!
+		 
+		                mEditUsername = (TextView) mReadItLaterDialog.findViewById(R.id.editUsername);
+		                mEditPassword = (TextView) mReadItLaterDialog.findViewById(R.id.editPassword);
+		                mRememberLogin = (CheckBox) mReadItLaterDialog.findViewById(R.id.checkBoxRemember);
+		                
+		                //set up button
+		                mReadItLaterButton = (Button) mReadItLaterDialog.findViewById(R.id.buttonLogin);
+		                mReadItLaterButton.setOnClickListener(new OnClickListener() {
+		                @Override
+		                    public void onClick(View v) {
+			                
+		                		//save login if the 'remember me' checked
+			                	if (mRememberLogin.isChecked() && 
+			                		mEditUsername.getText() != null && 
+			                		mEditPassword.getText() != null
+			                		) 
+			                    {
+			                		
+			                    	appSettings.setReadItLaterUsername(mEditUsername.getText().toString());
+			                    	appSettings.setReadItLaterPassword(mEditPassword.getText().toString());
+			                    }
+			                	
+			                	m_ProgressDialog = ProgressDialog.show(mActivity, "Saving", "Please wait...", true);
+		                	
+		                		//submit to instapaper
+		                		int code = saveToReadItLater(mEditUsername.getText(),
+		                								  mEditPassword.getText(),
+		                								  newsItem.getUrl(),
+		                								  newsItem.getTitle()
+		                									);
+		                		
+		                    }
+		                });
+		                //now that the dialog is set up, it's time to show it    
+		                mReadItLaterDialog.show();
+				            }});
+					}
+				} catch (Exception ex)
+				{
+					Log.e(TAG, "ReadItLater UI/Network/Data Errors: " + ex);
+					Toast.makeText(mActivity, "Unable to save: application error", 50000).show();
+				}   
+		        
+	            }};
+	            
+	            m_ProgressDialog = ProgressDialog.show(mActivity, "Saving", "Please wait...", true);
+	            
+	            Thread thread =  new Thread(null, readItLaterRunner, "HackerNewsReadItLaterBackground");
+	            thread.start(); 
+		            
 			} else if (menuItemName.equals("Save for Later"))
 			{
 				Log.d(TAG, "Save Article");
@@ -504,7 +692,8 @@ public class NewsFragment extends ListFragment
 						cv.put("title", newsItem.getTitle());
 						cv.put("url", newsItem.getUrl());
 						cv.put("author", newsItem.getAuthor());
-						cv.put("posted_date", newsItem.getPostedDate());
+						Date now = new Date();
+						cv.put("posted_date", DateFormat.getInstance().format(now));
 						cv.put("points", newsItem.getPoints());
 						cv.put("comments", newsItem.getComments());
 						db.insert("hackernews_saved", null, cv);

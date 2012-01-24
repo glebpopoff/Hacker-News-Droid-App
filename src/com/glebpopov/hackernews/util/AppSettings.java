@@ -78,4 +78,64 @@ public class AppSettings
 		}
          
      }
+     
+     public String getReadItLaterUsername() {
+         try 
+         {
+ 			return EncryptionUtil.decrypt("username", appSharedPrefs.getString("read_it_later_username", ""));
+ 		} catch (Exception e) {
+ 			Log.e(TAG, "Unable to decrypt or retrieve Read It Later username setting: " + e);
+ 		}
+ 		return null;
+      }
+      
+      public String getReadItLaterPassword() {
+     	try 
+         {
+  			return EncryptionUtil.decrypt("password", appSharedPrefs.getString("read_it_later_password", ""));
+  		} catch (Exception e) {
+  			Log.e(TAG, "Unable to decrypt or retrieve Read It Later password setting: " + e);
+  		}
+  		return null;
+      }
+      
+      public void removeReadItLaterCredentials()
+      {
+          try 
+          {
+         	//remove username
+ 			prefsEditor.remove("read_it_later_username");
+ 			prefsEditor.commit();
+ 			//remove password
+ 			prefsEditor.remove("read_it_later_password");
+ 			prefsEditor.commit();
+ 		} catch (Exception e) {
+ 			Log.e(TAG, "Unable to remove or commit Read It Later username/password setting: " + e);
+ 		}
+          
+      }
+
+      public void setReadItLaterUsername(String text) 
+      {
+          try 
+          {
+ 			prefsEditor.putString("read_it_later_username", EncryptionUtil.encrypt("username", text));
+ 			prefsEditor.commit();
+ 		} catch (Exception e) {
+ 			Log.e(TAG, "Unable to encrypt or commit Read It Later username setting: " + e);
+ 		}
+          
+      }
+      
+      public void setReadItLaterPassword(String text) 
+      {
+          try 
+          {
+ 			prefsEditor.putString("read_it_later_password", EncryptionUtil.encrypt("password", text));
+ 			prefsEditor.commit();
+ 		} catch (Exception e) {
+ 			Log.e(TAG, "Unable to encrypt or commit Read It Later password setting: " + e);
+ 		}
+          
+      }
 }

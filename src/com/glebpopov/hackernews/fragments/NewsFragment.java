@@ -253,7 +253,9 @@ public class NewsFragment extends ListFragment
 								) ? (NewsItem)mAdapter.getItem(info.position) : null;
 		if (item != null)
 		{
-			menu.setHeaderTitle(item.getTitle());
+			TextView titleView = (TextView)this.getActivity().getLayoutInflater().inflate(R.layout.news_fragment_dialog_title, null);
+			titleView.setText(item.getTitle());
+			menu.setHeaderView(titleView);
 			
 			Log.d(TAG, "Title: " + item.getTitle());
 		    String[] menuItems = getResources().getStringArray(R.array.article_menu);

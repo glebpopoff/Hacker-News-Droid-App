@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.text.util.Linkify;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -268,6 +269,8 @@ public class CommentsFragmentView extends Fragment
 	                        
 	                        if (commentView != null) 
 	                        {
+	                        	//testing HTML formatting
+	                        	//commentView.setText(Html.fromHtml(o.getComment() + "<br><i>i = 9;</i><br/><br/><i>t = 5;</i>")); 
 	                        	commentView.setText(o.getComment()); 
 	                        	Linkify.addLinks(commentView, Linkify.ALL);
 	                        	if (isNiteMode)

@@ -20,6 +20,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.text.Html;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -65,59 +66,6 @@ public class CommentsFragment extends ListFragment
 	
 	public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        /*storyItem = (NewsItem) getActivity().getIntent().getSerializableExtra("story_item");
-        if (storyItem != null && storyItem.getId() > 0 && storyItem.getTitle() != null)
-        {
-        	if (mActivity == null)
-            {
-            	mActivity = getActivity();
-            }
-            
-            if (mActivity == null)
-            {
-            	Toast.makeText(mActivity, "Something went wrong. Please restart the app.", 50000).show();
-            	return;
-            }
-            
-        	//add headerview
-        	LayoutInflater vi = (LayoutInflater)mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View v = vi.inflate(R.layout.comments_header_view, null);
-        	if (v != null)
-        	{
-        		TextView storyTitleView = (TextView) v.findViewById(R.id.story_title);
-                TextView storyPostedWhenView = (TextView) v.findViewById(R.id.story_hour);
-                TextView storyDomainView = (TextView) v.findViewById(R.id.story_domain);
-                
-            	if (storyTitleView != null && storyItem.getTitle() != null)
-                {
-                	storyTitleView.setText(storyItem.getTitle());
-                	storyTitleView.setVisibility(View.VISIBLE);
-                }
-                
-                if (storyPostedWhenView != null && storyItem.getPostedDate() != null)
-                {
-                	storyPostedWhenView.setText(storyItem.getPostedDate());
-                	storyPostedWhenView.setVisibility(View.VISIBLE);
-                }
-                
-                if (storyDomainView != null && storyItem.getAuthor() != null)
-                {
-                	storyDomainView.setText(storyItem.getAuthor());
-                	storyDomainView.setVisibility(View.VISIBLE);
-                }
-                
-        		Log.d(TAG, "Adding Header View");
-        		getListView().addHeaderView(v);
-        	}
-        	
-        	//get data and set listadapter
-	        downloadData();
-        } else
-        {
-        	Log.d(TAG, "getComments: invalid story id");
-    		setEmptyText("No data returned");
-        }
-        */
     }
 	
 	private void downloadData() {
@@ -277,7 +225,8 @@ public class CommentsFragment extends ListFragment
 	            	
 	                if (commentViewChild != null) 
 	                {
-	                	commentViewChild.setText(childItem.getComment()); 
+	                	commentViewChild.setText(Html.fromHtml("<pre>ttt</pre>")); 
+	                	//commentViewChild.setText(childItem.getComment()); 
 	                	int color = (parent.getColor() == Color.WHITE) ?
 	                				Color.LTGRAY : 
 	                				Color.WHITE;
@@ -314,19 +263,6 @@ public class CommentsFragment extends ListFragment
         	Log.d(TAG, "getView: Position" + position);
         	try
         	{ 
-        		/*
-        		 * View v;
-        		LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                if (convertView == null) {
-                	convertView = vi.inflate(R.layout.fragment_comments, null);
-                	v = convertView;
-                	convertView.setTag(v);
-                } else
-                {
-                	v = (View) convertView.getTag();
-                }
-        		 */
-        		
         		View v ;
         		LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 if (convertView == null)

@@ -1,2 +1,6 @@
+*.zip
+*.keystore
+.DS_Store
+submission/
 bin/
 gen/
